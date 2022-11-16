@@ -1,13 +1,14 @@
 ---
 title: 'Setup'
 sidebar_position: 1
+slug: 'iOS_setup'
 ---
 
 # Sharpsell iOS SDK
 
 ## Pre-Requisites
 
-1. Minimum iOS version supported by sharpsell is iOS `11.0`
+1. Minimum iOS version supported by sharpsell is iOS `12.0`
  
 2. Firebase should be enabled and the `GoogleService-Info.plist` file should be properly setup.
 
@@ -65,7 +66,7 @@ simulator then use XCFramrworks which is available in Debug Folder and replace t
 project as mentioned above.
 
 
-:::caution
+:::danger Use Release framework for release build
 
 Make sure we are using release frameworks when sharing a build or release the app to the
 app store. Debug frameworks will be slower compare with release framework.

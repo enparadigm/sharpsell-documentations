@@ -1,6 +1,7 @@
 ---
 title: "Using Sharpsell SDK in Android"
 sidebar_position: 2
+slug: 'android_implementation'
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

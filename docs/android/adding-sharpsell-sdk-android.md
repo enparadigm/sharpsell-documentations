@@ -1,6 +1,7 @@
 ---
 title: 'Setup'
 sidebar_position: 1
+slug: 'android_setup'
 ---
 
 # Sharpsell SDK Integration
