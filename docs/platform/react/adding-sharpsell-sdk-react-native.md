@@ -73,9 +73,3 @@ dependencies {
     implementation "com.enparadigm.sharpsell:sdk:$sdkVersion"
 }
 ```
-
-VINOD and AWS videos here:
-<ReactPlayer playing controls url='https://www.youtube.com/watch?v=8Vzv2CdbEY0&list=PLjxrf2q8roU23XGwz3Km7sQZFTdB996iG&index=12&ab_channel=Flutter' />
-
-Assets videos here:
-<ReactPlayer playing controls url='/videos/test.mp4'/>

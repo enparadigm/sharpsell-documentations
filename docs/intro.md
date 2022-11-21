@@ -6,11 +6,10 @@ slug: /
 
 ### Sharpsell SDK
 
-Jump into Firebase on your platform 
-Start developing on your platform now, following the platform SDK reference documentation and sample intgration video to help you seamless integration of sharpsell SDK.
+Start integrating sharpsell SDK on your platform easily by following the integration documentations. We have attached platform specific documentation, reference project and integration tutorial video  to make the integration smoother.
 
-#### - [Open Android Documentaion](android-integrations/adding-sharpsell-sdk-android.md)
-#### - [Open iOS Documentaion](iOS-integrations/adding-sharpsell-sdk-ios.md)
+#### We support following platforms:
 
-
-
+#### - [Android Documentaion](platform/android/android_setup)
+#### - [iOS Documentaion](platform/iOS/iOS_setup)
+#### - [React Native Documentaion](platform/react/react_native_setup)
