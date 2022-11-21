@@ -3,6 +3,7 @@ title: 'Setup'
 sidebar_position: 1
 slug: 'android_setup'
 ---
+import ReactPlayer from 'react-player';
 
 # Sharpsell SDK Integration
 
@@ -72,3 +73,9 @@ dependencies {
     implementation "com.enparadigm.sharpsell:sdk:$sdkVersion"
 }
 ```
+
+<!-- Youtube and AWS videos here:
+<ReactPlayer playing controls url='https://www.youtube.com/watch?v=8Vzv2CdbEY0&list=PLjxrf2q8roU23XGwz3Km7sQZFTdB996iG&index=12&ab_channel=Flutter' />
+
+Assets videos here:
+<ReactPlayer playing controls url='/videos/test.mp4'/> -->
