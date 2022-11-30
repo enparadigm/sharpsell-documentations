@@ -36,7 +36,7 @@ allprojects {
         maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com" }
         maven {
-            url artifactory_url
+            url 'http://artifactory.enparadigm.com/artifactory/sharpsell'
             credentials {
                 username = artifactory_username
                 password = artifactory_password
@@ -44,9 +44,6 @@ allprojects {
         }
     }
 }
-```gradle
-```gradle
-artifactory_url=http://artifactory.enparadigm.com/artifactory/sharpsell
 ```
 :::info
 Sharpsell team will give the artifactory_username and artifactory_password. 
