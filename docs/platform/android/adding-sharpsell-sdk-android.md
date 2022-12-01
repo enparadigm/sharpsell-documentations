@@ -24,6 +24,13 @@ Firebase setup have to be done in order to enable push notification and analytic
 To setup android firebase setup follow this - https://firebase.google.com/docs/android/setup
 :::
 
+## Needed User Permissions 
+
+Sharpsell needs some user permissions like gallery access, camera access etc,. In order to set profile picture and for other feature. 
+
+Below we have mentioned what all the permissons will be needed and reason for that.
+1. 
+
 ## Installation
 1. Add the following lines to the project level `builds.gradle` file.
 ```gradle
