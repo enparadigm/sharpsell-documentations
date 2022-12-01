@@ -1,6 +1,6 @@
 ---
 title: 'Setup'
-sidebar_position: 1
+sidebar_position: 2
 slug: 'android_setup'
 ---
 import ReactPlayer from 'react-player';
