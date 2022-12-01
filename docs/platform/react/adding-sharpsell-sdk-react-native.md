@@ -1,8 +1,9 @@
 ---
 title: 'Setup'
 sidebar_position: 1
-slug: 'android_setup'
+slug: 'react_native_setup'
 ---
+import ReactPlayer from 'react-player';
 
 # Sharpsell SDK Integration
 
@@ -16,26 +17,40 @@ android.useAndroidX=true
 ```gradle
 minSdkVersion 21
 ```
+
 3. Firebase should be enabled and the `google-seriveces.json` file should be properly setup.
 
 :::tip Firebase setup
 Firebase setup have to be done in order to enable push notification and analytics on sharpsell SDK.
-To setup android firebase setup follow this - https://firebase.google.com/docs/android/setup
+To setup android firebase setup follow this - https://rnfirebase.io/
 :::
 
 ## Installation
 1. Add the following lines to the project level `builds.gradle` file.
 ```gradle
 allprojects {
+    configurations.all {
+        resolutionStrategy {
+            force "com.facebook.react:react-native:" + REACT_NATIVE_VERSION
+        }
+    }
     repositories {
-        google()
+        mavenLocal()
+        maven {
+            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+            url(new File(['node', '--print', "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim(), '../android'))
+        }
+        maven {
+            // Android JSC is installed from npm
+            url(new File(['node', '--print', "require.resolve('jsc-android/package.json')"].execute(null, rootDir).text.trim(), '../dist'))
+        }
         mavenCentral()
         jcenter()
         maven { url 'https://storage.googleapis.com/download.flutter.io' }
         maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com" }
         maven {
-            url artifactory_url
+            url 'http://artifactory.enparadigm.com/artifactory/sharpsell'
             credentials {
                 username = artifactory_username
                 password = artifactory_password
@@ -43,9 +58,6 @@ allprojects {
         }
     }
 }
-```gradle
-```gradle
-artifactory_url=http://artifactory.enparadigm.com/artifactory/sharpsell
 ```
 :::info
 Sharpsell team will give the artifactory_username and artifactory_password. 
@@ -68,7 +80,36 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.3.0')
     implementation 'com.google.firebase:firebase-messaging-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
-
+    
     implementation "com.enparadigm.sharpsell:sdk:$sdkVersion"
+}
+```
+
+## Creating Package
+
+Also, you have to created a .java file in `android/app/src/main/java` as SharpsellSDKPackage.java have to create the sdk into package so that you can access the native modules using this package. These are steps recommanded from react native 
+
+```
+package com.myreactnative;
+import com.facebook.react.ReactPackage;
+import com.facebook.react.bridge.NativeModule;
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.uimanager.ViewManager;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class SharpSellSDKPackage implements ReactPackage  {
+    @Override
+    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
+        return Collections.emptyList();
+    }
+    
+    @Override
+    public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
+        return Arrays.<NativeModule>asList(
+                new SharpSellSDK(reactContext)
+        );
+    }
 }
 ```
