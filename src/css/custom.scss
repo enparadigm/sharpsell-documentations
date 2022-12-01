@@ -1,0 +1,59 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+ @use "doc";
+ @use "footer";
+ @use "introduction-page";
+ @use "colors";
+ @use "sidebar";
+ @use "header";
+ @use "table-of-contents";
+
+ .no-shadow {
+   box-shadow: none !important;
+ }
+ 
+ .close {
+   color: #fff;
+   opacity: 0.75;
+ }
+ 
+ 
+ .sub-heading {
+   grid-column: 1 / -1;
+ 
+   h3 {
+     margin-bottom: 10px;
+   }
+ }
+ 
+ .arrow {
+   transition: all 0.3s ease-in-out;
+   display: grid;
+   margin-left: 6px;
+ 
+   path {
+     stroke: var(--ifm-link-color);
+   }
+ }
+ 
+ .heading-badge {
+   font-size: 0.9rem;
+ }
+ 
+ // Table body fix for longer types and args
+ tbody {
+   word-break: break-word;
+ }
+ 
+ /* Dark Mode Styles */
+ 
+ html[data-theme='dark'] {
+ 
+   .no-shadow {
+     background-color: var(--color-gray-0);
+   }
+ }
