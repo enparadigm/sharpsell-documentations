@@ -3,15 +3,25 @@ title: "Setup"
 sidebar_position: 1
 slug: "iOS_setup"
 ---
+import ReactPlayer from 'react-player';
 
 
 # Sharpsell iOS SDK
 
+
+
+
+
+<ReactPlayer playing controls url='/videos/iOS_setup.mp4'/>
+
+
 ## Pre-Requisites
 
-1. Minimum iOS version supported by sharpsell is iOS `12.0`
+1. Xcode 13.4.1 or later 
 
-2. Firebase should be enabled and the `GoogleService-Info.plist` file should be properly setup.
+2. Minimum iOS version supported by sharpsell is iOS `12.0`
+
+3. Firebase should be enabled and the `GoogleService-Info.plist` file should be properly setup.
 
 :::tip Firebase setup
 Firebase setup have to be done in order to enable push notification and analytics on sharpsell SDK.

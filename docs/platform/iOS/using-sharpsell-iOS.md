@@ -3,6 +3,11 @@ title: "Using Sharpsell SDK in iOS"
 sidebar_position: 2
 slug: 'iOS_implementation'
 ---
+import ReactPlayer from 'react-player';
+
+<br></br>
+<ReactPlayer playing controls url='/videos/iOS_setup.mp4'/>
+<br></br><br></br>
 
 :::note
 `Import SharpsellCore` in the class or struct where ever you are trying access Sharpsell.
