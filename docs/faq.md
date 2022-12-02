@@ -15,6 +15,15 @@ sidebar_label: 'FAQ'
 When the artifactory URL is down you will get this error. If so, please wait for sometime. Usally it will be up in few mins. If you are facing the issue in long time, please reach sharpsell team if the above resolution is not fixing your issues.
 </details>
 
+
+
+<details>
+<summary>I want to integrate Sharpsell SDK, what if my app’s target android version is different from that of Sharpsell?</summary>
+
+There is something called `<uses-sdk/>` contained in `<manifest>` which lets you express an application's compatibility with one or more versions of the Android platform, by means of an API Level integer. The API Level expressed by an application will be compared to the API Level of a given Android system, which may vary among different Android devices.
+
+</details>
+
 ### iOS
 
 <details>

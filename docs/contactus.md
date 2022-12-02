@@ -20,4 +20,4 @@ surya.saravanakumar@sharpsell.ai
 
 
 
-## Thanks for choosing sharpsell, Happy coding !!
+<h2> Thanks for choosing sharpsell, Happy coding !! </h2> 

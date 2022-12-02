@@ -69,9 +69,9 @@ There are 2 steps involved in adding the sharpsell SDK in your project.
 
 ### 1. Add the Sharpsell Swift Package
 
-1. Add Sharpsell package [URL](https://github.com/enparadigm/SharpsellCore.git) as package
-   dependency in you parent app.
-   For e.g - Attached the sample screenshot for your refrence (version may changes, contact sharpsell team for the latest version)
+1. Add Sharpsell package [URL](https://github.com/enparadigm/SharpsellCore.git) as a package
+   dependency in your parent app.
+   For e.g - Attached the sample screenshot for your reference (the version may changes, contact sharpsell team for the latest version)
 
    ```swift title="Sharpsell SDK swift package URL"
    https://github.com/enparadigm/SharpsellCore.git
