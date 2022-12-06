@@ -6,7 +6,7 @@ slug: 'iOS_implementation'
 import ReactPlayer from 'react-player';
 
 <br></br>
-<ReactPlayer playing controls url='/videos/iOS_setup.mp4'/>
+<ReactPlayer playing controls url='/videos/iOS_usage.mp4'/>
 <br></br><br></br>
 
 :::note
