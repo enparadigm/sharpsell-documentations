@@ -1,6 +1,6 @@
 ---
 title: "Using Sharpsell SDK in Android"
-sidebar_position: 2
+sidebar_position: 3
 slug: 'android_implementation'
 ---
 import Tabs from '@theme/Tabs';
@@ -49,7 +49,7 @@ class MyApp : Application() {
 ## Step 2: Initializing the SDK
 
 The SDK has to be initialized before calling any other methods of the SDK. On calling the `Sharpsell.initialize` method, a success or failure status will be returned via a callback.
-Sample code on how to initialize the SDK is given below.
+A sample code on how to initialize the SDK is given below.
 
 
 ```mdx-code-block
@@ -183,7 +183,7 @@ Sharpsell.initialize(
 ```
 
 :::note
-Sharpsell team will provide the follwing items.
+Sharpsell team will provide the following items.
 1. company_code
 2. user_group_id
 :::
@@ -255,7 +255,7 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 ## Step 4: Adding Sharpsell SDK Entry points
 
 :::note
-Make sure to call ` Sharpsell.INSTANCE.initialize` function before calling any other below mentioned entry points.
+Make sure to call ` Sharpsell.INSTANCE.initialize` function before calling any other below-mentioned entry points.
 :::
 
 
@@ -326,13 +326,13 @@ Sharpsell.open(this@MainActivity, data.toString())
 ```
 
 :::note
-We need to pass proper `presentationInputName` and input fileds as per the presentation. 
-If the presentation input name is not valid then it will just open the customer prensetation screen.
+We need to pass proper `presentationInputName` and input fields as per the presentation. 
+If the presentation input name is not valid then it will just open the customer presentation screen.
 :::
 
 ### Launchpad Screen
 
-To open Sharpsell launcpad screen from your app use the below function
+To open Sharpsell launchpad screen from your app use the below function
 
 ```mdx-code-block
 <Tabs>
@@ -530,7 +530,7 @@ Sharpsell.open(this@MainActivity, data.toString())
 
 ### Quick Links Screen
 
-To open Sharpsell quick linls screen from your app use the below function
+To open Sharpsell quick links screen from your app use the below function
 
 ```mdx-code-block
 <Tabs>
@@ -560,7 +560,7 @@ Sharpsell.open(this@MainActivity, data.toString())
 ```
 
 ### Logout and clear user data
-Call the sharpsell cleardata function while the user is logged out form 
+Call the Sharpsell clear data function while the user is logged out form 
 
 ```mdx-code-block
 <Tabs>
@@ -588,13 +588,13 @@ Sharpsell.clearData(this@MainActivity)
 
 
 :::caution
-Make sure you are sending fcm token to sharpsell SDK via `Sharpsell.INSTANCE.initialize` function as one of the arguments. If fcm token is not sent then, you won't be reciving any sharpsell notifications
+Make sure you are sending fcm token to Sharpsell SDK via `Sharpsell.INSTANCE.initialize` function as one of the arguments. If fcm token is not sent then, you won't be receiving any Sharpsell notifications
 :::
 
 ## Enable / Disable logs in the SDK
 This method can be called just before `Sharpsell.INSTANCE.initialize`.
 Pass `true` to enable logs.
-Pass`false` to disable logs.
+Pass `false` to disable logs.
 
 ```mdx-code-block
 <Tabs>
