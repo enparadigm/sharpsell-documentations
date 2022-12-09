@@ -7,7 +7,7 @@ slug: 'android_setup'
 # Sharpsell SDK Integration
 
 ## Pre-Requisites
-1. The application should be migrated to AndroidX. Check if the following line is present in the project level `gradle.properties`. If this line is not present, the project needs to be migrated to [androidX](https://developer.android.com/jetpack/androidx/migrate).
+1. The application should be migrated to AndroidX. Check if the following line is present in the project level `gradle.properties`. If this line is not present, the project needs to be migrated to [androidX][https://developer.android.com/jetpack/androidx/migrate].
 
 ```gradle
 android.useAndroidX=true
@@ -16,22 +16,22 @@ android.useAndroidX=true
 ```gradle
 minSdkVersion 21
 ```
-3. Firebase should be enabled and the `google-seriveces.json` file should be properly setup.
+3. Firebase should be enabled and the `google-seriveces.json` file should be properly set up.
 
 :::tip Firebase setup
-Firebase setup have to be done in order to enable push notification and analytics on sharpsell SDK.
-To setup android firebase setup follow this - https://firebase.google.com/docs/android/setup
+Firebase setup has to be done to enable push notification and analytics on Sharpsell SDK.
+To set up android firebase setup follow this - https://firebase.google.com/docs/android/setup
 :::
 
-## Needed User Permissions 
+<!-- ## Needed User Permissions 
 
-Sharpsell needs some user permissions like gallery access, camera access etc,. In order to set profile picture and for other feature. 
+Sharpsell needs some user permissions like gallery access, camera access etc. To set a profile picture and other features. 
 
-Below we have mentioned what all the permissons will be needed and reason for that.
-1. 
+Below we have mentioned what all the permissions will be needed and the reason for that.
+1.  -->
 
 ## Installation
-1. Add the following lines to the project level `builds.gradle` file.
+1. Add the following lines to the project-level `builds.gradle` file.
 ```gradle
 allprojects {
     repositories {
@@ -55,7 +55,7 @@ allprojects {
 Sharpsell team will give the artifactory_username and artifactory_password. 
 :::
 
-2. Add the following lines to the app level `builds.gradle` file.
+2. Add the following lines to the app-level `builds.gradle` file.
 ```gradle
 android {
     compileOptions {
@@ -79,3 +79,6 @@ dependencies {
     }
 }
 ```
+
+
+[https://developer.android.com/jetpack/androidx/migrate]: https://developer.android.com/jetpack/androidx/migrate
