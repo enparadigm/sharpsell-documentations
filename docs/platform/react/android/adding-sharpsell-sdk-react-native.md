@@ -18,15 +18,15 @@ android.useAndroidX=true
 minSdkVersion 21
 ```
 
-3. Firebase should be enabled and the `google-seriveces.json` file should be properly setup.
+3. Firebase should be enabled and the `google-seriveces.json` file should be properly set up.
 
 :::tip Firebase setup
-Firebase setup have to be done in order to enable push notification and analytics on sharpsell SDK.
-To setup android firebase setup follow this - https://rnfirebase.io/
+Firebase setup has to be done in order to enable push notification and analytics on Sharpsell SDK.
+To set up android firebase setup follow this - https://rnfirebase.io/
 :::
 
 ## Installation
-1. Add the following lines to the project level `builds.gradle` file.
+1. Add the following lines to the project-level `builds.gradle` file.
 ```gradle
 allprojects {
     configurations.all {
@@ -63,7 +63,7 @@ allprojects {
 Sharpsell team will give the artifactory_username and artifactory_password. 
 :::
 
-2. Add the following lines to the app level `builds.gradle` file.
+2. Add the following lines to the app-level `builds.gradle` file.
 ```gradle
 android {
     compileOptions {
@@ -90,7 +90,7 @@ dependencies {
 
 ## Creating Package
 
-Also, you have to created a .java file in `android/app/src/main/java` as SharpsellSDKPackage.java have to create the sdk into package so that you can access the native modules using this package. These are steps recommanded from react native 
+Also, you have to create a .java file in `android/app/src/main/java` as SharpsellSDKPackage.java have to create the SDK into the package so that you can access the native modules using this package. These are steps recommended by react native 
 
 ```
 package com.myreactnative;

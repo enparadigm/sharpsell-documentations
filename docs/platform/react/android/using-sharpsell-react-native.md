@@ -39,7 +39,7 @@ public class MainApplication extends Application implements ReactApplication {
 ## Step 2: Initializing the SDK
 
 The SDK has to be initialized before calling any other methods of the SDK. On calling the `Sharpsell.initialize` method, a success or failure status will be returned via a callback.
-Sample code on how to initialize the SDK is given below.
+A sample code on how to initialize the SDK is given below.
 
 ```
 Sharpsell.INSTANCE.initialize()
@@ -49,10 +49,10 @@ Sharpsell.INSTANCE.initialize()
 ## Step 3: Adding Sharpsell SDK Entry points
 
 :::note
-Make sure to call ` Sharpsell.INSTANCE.initialize` function before calling any other below mentioned entry points.
+Make sure to call ` Sharpsell.INSTANCE.initialize` function before calling any other below-mentioned entry points.
 :::
 
-To make Sharpsell SDK entry points, user should create another .java file where we call the package `SharpSellSDKPackage` which we made earlier.
+To make Sharpsell SDK entry points, the user should create another .java file where we call the package `SharpSellSDKPackage` which we made earlier.
 
 ```
 package com.myreactnative;
@@ -105,12 +105,12 @@ public class SharpSellSDK extends ReactContextBaseJavaModule {
 ```
 
 :::note
-Sharpsell team will provide the follwing items.
+Sharpsell team will provide the following items.
 1. company_code
 2. user_group_id
 :::
 
-In the above file you have to add the below entry points..
+In the above file, you have to add the below entry points.
 
 
 ### Home Screen
@@ -163,8 +163,7 @@ const openHomePage = async () => {
 ```
 
 #### Presentation Screen
-
-To open Sharpsell customer presentation screen from your app use the below function
+To open the Sharpsell customer presentation screen from your app use the below function
 
 
 ```
@@ -174,14 +173,13 @@ Sharpsell.INSTANCE.open(getReactApplicationContext(), dataPS.toString());
 ```
 
 :::note
-We need to pass proper `presentationInputName` and input fileds as per the presentation. 
-If the presentation input name is not valid then it will just open the customer prensetation screen.
+We need to pass proper `presentationInputName` and input fields as per the presentation. 
+If the presentation input name is not valid then it will just open the customer presentation screen.
 :::
 
 
 ### Launchpad Screen
-
-To open Sharpsell launcpad screen from your app use the below function
+To open the Sharpsell launchpad screen from your app use the below function
 
 ```
 JSONObject data = new JSONObject();
@@ -191,8 +189,7 @@ Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 
 
 ### Marketing Collateral Screen
-
-To open Sharpsell marketing collateral directory screen from your app use the below function
+To open the Sharpsell marketing collateral directory screen from your app use the below function
 
 ```
 JSONObject data = new JSONObject();
@@ -202,8 +199,7 @@ Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 
 
 ### Poster of the day Screen
-
-To open Sharpsell poster of the day screen from your app use the below function
+To open the Sharpsell poster of the day screen from your app use the below function
 
 ```
 JSONObject data = new JSONObject();
@@ -213,8 +209,7 @@ Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 
 
 ### Digital Visiting Card Screen
-
-To open Sharpsell digital visiting card screen from your app use the below function
+To open the Sharpsell digital visiting card screen from your app use the below function
 
 ```
 JSONObject data = new JSONObject();
@@ -224,8 +219,7 @@ Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 
 
 ### Timer Challenge Home Screen
-
-To open Sharpsell timer challenge screen from your app use the below function
+To open the Sharpsell timer challenge screen from your app use the below function
 
 ```
 JSONObject data = new JSONObject();
@@ -235,8 +229,7 @@ Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 
 
 ### Product Bundle Screen
-
-To open Sharpsell product bundle screen from your app use the below function
+To open the Sharpsell product bundle screen from your app use the below function
 
 ```
 JSONObject data = new JSONObject();
@@ -247,7 +240,7 @@ Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 
 ### Quick Links Screen
 
-To open Sharpsell quick linls screen from your app use the below function
+To open Sharpsell quick links screen from your app use the below function
 
 ```
 JSONObject data = new JSONObject();
@@ -257,7 +250,7 @@ Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 
 
 ### Logout and clear user data
-Call the sharpsell cleardata function while the user is logged out form 
+Call the sharp sell clear data function while the user is logged out form 
 
 ```
 Sharpsell.INSTANCE.clearData(getReactApplicationContext());
@@ -292,13 +285,13 @@ public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
 
 
 :::caution
-Make sure you are sending fcm token to sharpsell SDK via `Sharpsell.INSTANCE.initialize` function as one of the arguments. If fcm token is not sent then, you won't be reciving any sharpsell notifications
+Make sure you are sending fcm token to Sharpsell SDK via `Sharpsell.INSTANCE.initialize` function as one of the arguments. If fcm token is not sent then, you won't be receiving any Sharpsell notifications
 :::
 
 ## Enable / Disable logs in the SDK
 This method can be called just before `Sharpsell.INSTANCE.initialize`.
 Pass `true` to enable logs.
-Pass`false` to disable logs.
+Pass `false` to disable logs.
 
 ```
 Sharpsell.INSTANCE.enableLogsInProductionSdk(getReactApplicationContext(), true);

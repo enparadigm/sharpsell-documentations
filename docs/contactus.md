@@ -5,7 +5,7 @@ slug: "contact-us"
 ---
 
 
-Incase our FAQ page does't contain or slove your issue in sharpsell SDK integration please contact the send a detailed mail of the issue and step to reproduce the same to below mentioned email id. Our team will be communicate you as earliest as possible. 
+In case our FAQ page doesn't contain or solve your issue in Sharpsell SDK integration please contact the send a detailed mail of the issue and steps to reproduce the same to the below-mentioned email ids. Our team will communicate with you as earliest as possible. 
 
 ```swift title="to:-"
 sumit.arya@sharpsell.ai
@@ -20,4 +20,4 @@ surya.saravanakumar@sharpsell.ai
 
 
 
-## Thanks for choosing sharpsell, Happy coding !!
+<h2> Thanks for choosing Sharpsell, Happy coding !! </h2> 

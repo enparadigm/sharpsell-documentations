@@ -100,9 +100,9 @@ const config = {
       },
       algolia: {
         // If Algolia did not provide you any appId, use 'BH4D9OD16A'
-        appId: 'BH4D9OD16A',//'NS6GBGYACO',
+        appId: '8JNPSLXL9K',//'BH4D9OD16A',//'NS6GBGYACO', // Sharpsell - 8JNPSLXL9K
         // Public API key: it is safe to commit it
-        apiKey: '8f0f11e3241b59574c5dd32af09acdc8',
+        apiKey: '1fac302cefcfddf32e6a9903d2be584d',//'8f0f11e3241b59574c5dd32af09acdc8',
         indexName: 'hasura-graphql',
         // Optional: see doc section below
         // contextualSearch: true,

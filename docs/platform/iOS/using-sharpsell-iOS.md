@@ -3,14 +3,18 @@ title: "Using Sharpsell SDK in iOS"
 sidebar_position: 2
 slug: 'iOS_implementation'
 ---
+import ReactPlayer from 'react-player';
+
+<br></br>
+<ReactPlayer playing controls url='/videos/iOS_usage.mp4'/>
+<br></br><br></br>
 
 :::note
-`Import SharpsellCore` in the class or struct where ever you are trying access Sharpsell.
+`Import SharpsellCore` in the class or struct where ever you are trying to access Sharpsell.
 :::
 
 ## Step 1:  Create Sharpsell Flutter Engine
-
-This function used to initialise the object required by the SDK - So, its better to call this
+This function is used to initialize the object required by the SDK - so it's better to call this
 function on app start preferably in `didFinishLaunchingWithOptions` function in `AppDelegate` class.
 
 ```swift
@@ -23,15 +27,15 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 }
 ```
 
-:::info
-Its better to call this function on app start preferably in `didFinishLaunchingWithOptions` function in `AppDelegate` class
+:::info 
+It's better to call this function on app start preferably in `didFinishLaunchingWithOptions` function in `AppDelegate` class
 :::
 
 ## Step 2: Initializing the Sharpsell SDK
 
 The SDK has to be initialized before calling any other methods of the SDK.
 On calling the `Sharpsell.services.initialize` method, a success or failure status will be returned via a callback.
-Sample code on how to initialize the SDK is given below.
+A sample code on how to initialize the SDK is given below.
 
 ```swift
        // Note - If you don't have any of the below data then don't pass null, just pass empty strings
@@ -61,7 +65,7 @@ Sample code on how to initialize the SDK is given below.
 ```
 
 :::info
-Sharpsell team will provide the follwing items.
+Sharpsell team will provide the following items.
 1. company_code
 2. user_group_id
 :::
@@ -69,11 +73,11 @@ Sharpsell team will provide the follwing items.
 ## Step 3: Handling Notification
 
 :::caution
-Firebase setup have to be done in order to enable push notification on sharpsell SDK.
-To setup iOS firebase setup follow this - https://firebase.google.com/docs/ios/setup
+Firebase setup has to be done to enable push notification on Sharpsell SDK.
+To set up iOS firebase setup follow this - https://firebase.google.com/docs/ios/setup
 :::
 
-Call the   `isSharpsellNotification` function in the `didReceiveRemoteNotification` delegate method in order to verify the recived notification is sharpsell notification or not. If it is a sharpsell notification then the notification will be shown as per the sharpsell configurations. 
+Call the `isSharpsellNotification` function in the `didReceiveRemoteNotification` delegate method to verify the received notification is a Sharpsell notification or not. If it is a Sharpsell notification then the notification will be shown as per the Sharpsell configurations. 
 
 ```swift title="AppDelegate.swift"
     func application(_ application: UIApplication,
@@ -95,7 +99,7 @@ Call the   `isSharpsellNotification` function in the `didReceiveRemoteNotificati
     }
 ```
 
-Call the below method in `didReceive` notification delegate method which will be called whenever user clicks on the recived notification. This function is responsible for opening and redirecting to sharpsell screen based on the notification input.
+Call the below method in the `didReceive` notification delegate method which will be called whenever the user clicks on the received notification. This function is responsible for opening and redirecting to the Sharpsell screen based on the notification input.
 
 ```swift title="AppDelegate.swift"
      Sharpsell.services.handleNotificationRedirection(notificationData: notificationInfo) { notificationData in
@@ -122,7 +126,7 @@ Call the below method in `didReceive` notification delegate method which will be
 ```
 
 :::note
-Make sure you are sending the firebase fcm token as a parameter to sharpsell sdk using  `Sharpsell.services.initialize` function. If you are not passing the proper token then you won't be reciving the notification which is triggred from the sharpsell portals
+Make sure you are sending the firebase fcm token as a parameter to Sharpsell SDK using  `Sharpsell.services.initialize` function. If you are not passing the proper token then you won't be receiving the notification which is triggered from the Sharpsell portals
 :::
 
 ## Step 4: Sharpsell SDK Entry points
@@ -132,8 +136,7 @@ Make sure to call ` Sharpsell.services.initialize` function before calling any o
 :::
 
 ### Home Screen
-
-To open Sharpsell home screen from your app use the below function
+To open the Sharpsell home screen from your app use the below function
 
 ```swift
        Sharpsell.services.open(arguments: [:]){ (flutterViewController) in
@@ -151,8 +154,7 @@ To open Sharpsell home screen from your app use the below function
 ```
 
 ### Presentation Screen
-
-To open Sharpsell customer presentation screen from your app use the below function
+To open the Sharpsell customer presentation screen from your app use the below function
 
 ```swift
 let presentationArgs = ["route" : "productPresentationInput",
@@ -174,13 +176,12 @@ let presentationArgs = ["route" : "productPresentationInput",
     }
 ```
 :::note
-We need to pass proper `presentationInputName` and input fileds as per the presentation. 
-If the presentation input name is not valid then it will just open the customer prensetation screen.
+We need to pass proper `presentationInputName` and input fields as per the presentation. 
+If the presentation input name is not valid then it will just open the customer presentation screen.
 :::
 
 ### Launchpad Screen
-
-To open Sharpsell launcpad screen from your app use the below function
+To open the Sharpsell launchpad screen from your app use the below function
 
 ```swift
      let launchpadArgs = ["route" : "launchpad"]
@@ -200,8 +201,7 @@ To open Sharpsell launcpad screen from your app use the below function
 ```
 
 ### Marketing Collateral Screen
-
-To open Sharpsell marketing collateral directory screen from your app use the below function
+To open the Sharpsell marketing collateral directory screen from your app use the below function
 
 ```swift
      let mcDirArgs = ["route" : "mcDirectory"]
@@ -221,8 +221,7 @@ To open Sharpsell marketing collateral directory screen from your app use the be
 ```
 
 ### Poster of the day Screen
-
-To open Sharpsell poster of the day screen from your app use the below function
+To open the Sharpsell poster of the day screen from your app use the below function
 
 ```swift
      let potdArgs = ["route" : "potd"]
@@ -242,8 +241,7 @@ To open Sharpsell poster of the day screen from your app use the below function
 ```
 
 ### Digital Visiting Card Screen
-
-To open Sharpsell digital visiting card screen from your app use the below function
+To open the Sharpsell digital visiting card screen from your app use the below function
 
 ```swift
      let dvcArgs = ["route" : "dvc"]
@@ -263,8 +261,7 @@ To open Sharpsell digital visiting card screen from your app use the below funct
 ```
 
 ### Timer Challenge Home Screen
-
-To open Sharpsell timer challenge screen from your app use the below function
+To open the Sharpsell timer challenge screen from your app use the below function
 
 ```swift
      let tcHomeArgs = ["route" : "tcHome"]
@@ -283,8 +280,7 @@ To open Sharpsell timer challenge screen from your app use the below function
 ```
 
 ### Product Bundle Screen
-
-To open Sharpsell product bundle screen from your app use the below function
+To open the Sharpsell product bundle screen from your app use the below function
 
 ```swift
      let productBundleArgs = ["route" : "productBundle"]
@@ -304,7 +300,7 @@ To open Sharpsell product bundle screen from your app use the below function
 
 ### Quick Links Screen
 
-To open Sharpsell quick linls screen from your app use the below function
+To open Sharpsell quick links screen from your app use the below function
 
 ```swift
      let quickLinksArgs = ["route" : "quickLinks"]
@@ -323,8 +319,7 @@ To open Sharpsell quick linls screen from your app use the below function
 ```
 
 ### Logout and clear user data
-
-Call the sharpsell cleardata function while the user is logged out form the app.
+Call the Sharpsell clear data function while the user is logged out from the app.
 
 ```swift
       Sharpsell.services.clearData {
@@ -335,7 +330,7 @@ Call the sharpsell cleardata function while the user is logged out form the app.
 ```
 
 :::caution
-Make sure the `Sharpsell.services.clearData` is called when the user is logged out of your application. If not, you will be getting some data mismatch in sharpsell screens if you have logged with different user compare to the previous instance.
+Make sure the `Sharpsell.services.clearData` is called when the user is logged out of your application. If not, you will be getting some data mismatch in sharp sell screens if you have logged in with a different user compared to the previous instance.
 :::
 
 
