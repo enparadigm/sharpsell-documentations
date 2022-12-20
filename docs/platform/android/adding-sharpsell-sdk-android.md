@@ -74,7 +74,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
-    implementation "com.enparadigm.sharpsell:sdk:$sdkVersion"
+    implementation ("com.enparadigm.sharpsell:sdk:$sdkVersion"){
+        exclude group: 'io.flutter', module: 'flutter_embedding_debug'
+        exclude group: 'io.flutter', module: 'flutter_embedding_profile'
+    }
 }
 ```
 

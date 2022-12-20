@@ -59,27 +59,30 @@ Sample code on how to initialize the SDK is given below.
 
 
 ```java
+// sample user meta data
+// this data can be used to update or create user meta details, if you don't have user meta then pass it as empty string
+
 val userMeta = JSONObject()
-userMeta.put("user_category", "SO12399")
+userMeta.put("user_category", "user_Category")
 userMeta.put("unique_id", "11111111")
-userMeta.put("location_code","Bengaluru1111")
+userMeta.put("location_code","loc_Id")
 userMeta.put("so_code", "11")
 userMeta.put("ro_code", "1111")
-userMeta.put("name", "Test So11")
-userMeta.put("doj", "2001-01-21")
+userMeta.put("name", "Test User")
+userMeta.put("doj", "date")
 userMeta.put("employee_code", "12345")
 userMeta.put("business_unit", "Micro Business Loan")
 userMeta.put("designation", "DST11")
-userMeta.put("state", "Karnataka 1")
-userMeta.put("city", "Muchandi 1")
-userMeta.put("zone", "South 1")
+userMeta.put("state", "state_Name")
+userMeta.put("city", "city_Name")
+userMeta.put("zone", "zone_Name")
 userMeta.put("cluster", "Belgaum")
-userMeta.put("branch", "BKC, Mumbai")
-userMeta.put("status", "ACTIVE99")
-userMeta.put("branch_name", "IDFC Bangalore11")
-userMeta.put("reporting_manager", "test.sm11@idfcfirstbank.com")
+userMeta.put("branch", "branch_Id")
+userMeta.put("status", "ACTIVE")
+userMeta.put("branch_name", "branch_Name")
+userMeta.put("reporting_manager", "test9@test9.com")
 userMeta.put("bu_type", "URBAN")
-userMeta.put("user_type","SO99")
+userMeta.put("user_type","user_Type")
 
 JSONObject data = new JSONObject();
 data.put("company_code", "company Code"); // Company code given to you by sharpsell team
@@ -88,7 +91,7 @@ data.put("user_group_id", 1);  // User Group ID given to you by sharpsell team
 data.put("country_code", "");
 data.put("user_meta", userMeta.toString())  // If you have user meta, pass those as a string. 
 // data.put("user_meta", "") // If you don't have user meta then pass empty string as a value
-data.put("name", "Surya"); // Pass the user name who is trying to login
+data.put("name", "Test User"); // Pass the user name who is trying to login
 data.put("mobile_number", "8888888888");  // Pass the user mobile number who is trying to login
 data.put("email", "test@test.com"); // Pass the user email id whoc is trying to login, if you were not maintaing then pass it as empty string
 //Pass the below key to enable push notification to be recived on your device
@@ -123,26 +126,26 @@ Sharpsell.INSTANCE.initialize(
 // this data can be used to update or create user meta details, if you don't have user meta then pass it as empty string
 
 val userMeta = JSONObject()
-userMeta.put("user_category", "SO12399")
+userMeta.put("user_category", "user_Category")
 userMeta.put("unique_id", "11111111")
-userMeta.put("location_code","Bengaluru1111")
+userMeta.put("location_code","loc_Id")
 userMeta.put("so_code", "11")
 userMeta.put("ro_code", "1111")
-userMeta.put("name", "Test So11")
-userMeta.put("doj", "2001-01-21")
+userMeta.put("name", "Test User")
+userMeta.put("doj", "date")
 userMeta.put("employee_code", "12345")
 userMeta.put("business_unit", "Micro Business Loan")
 userMeta.put("designation", "DST11")
-userMeta.put("state", "Karnataka 1")
-userMeta.put("city", "Muchandi 1")
-userMeta.put("zone", "South 1")
+userMeta.put("state", "state_Name")
+userMeta.put("city", "city_Name")
+userMeta.put("zone", "zone_Name")
 userMeta.put("cluster", "Belgaum")
-userMeta.put("branch", "BKC, Mumbai")
-userMeta.put("status", "ACTIVE99")
-userMeta.put("branch_name", "IDFC Bangalore11")
-userMeta.put("reporting_manager", "test.sm11@idfcfirstbank.com")
+userMeta.put("branch", "branch_Id")
+userMeta.put("status", "ACTIVE")
+userMeta.put("branch_name", "branch_Name")
+userMeta.put("reporting_manager", "test9@test9.com")
 userMeta.put("bu_type", "URBAN")
-userMeta.put("user_type","SO99")
+userMeta.put("user_type","user_Type")
 
 val data = JSONObject()
 data.put("company_code", companyCode);

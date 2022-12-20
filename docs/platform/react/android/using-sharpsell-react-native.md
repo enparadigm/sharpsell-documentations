@@ -8,10 +8,24 @@ import TabItem from '@theme/TabItem';
 
 ## Step 1: Create the SharpSell Engine
 
-Create the Sharpsell Engine with the `Application Context` in the `Application Class`.
+Create the Sharpsell Engine with the `Application Context` in the `Application Class`, and also have to add the `getPackages()` method
+as shown below to add SharpSellSDKPackage to your application React native packages, below is the code pattern for reference.
 
 ```
+import com.enparadigm.sharpsell.sdk.Sharpsell;
+
 public class MainApplication extends Application implements ReactApplication {
+
+    @Override
+    protected List<ReactPackage> getPackages() {
+      @SuppressWarnings("UnnecessaryLocalVariable")
+      List<ReactPackage> packages = new PackageList(this).getPackages();
+      // Packages that cannot be autolinked yet can be added manually here, for example:
+      // packages.add(new MyReactNativePackage());
+        packages.add(new SharpSellSDKPackage());
+      return packages;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -76,7 +90,7 @@ public class SharpSellSDK extends ReactContextBaseJavaModule {
         data.put("user_unique_id", "unique ser identifier);
         data.put("user_group_id", 1);
         data.put("country_code", ""); 
-        data.put("name", "Harsha B");
+        data.put("name", "Test User");
         data.put("mobile_number", '8888888888');
         data.put("email", "test@test.com"));
         data.put("fcm_token", fcmToken);
@@ -101,29 +115,51 @@ In the above file you have to add the below entry points..
 
 ### Home Screen
 
-To open Sharpsell home screen from your app use the below function
+To open Sharpsell home screen from your app, user have to create a reactmethod in `SharpSellSDK` class like below from.
 
 ```
-try{
-    Sharpsell.INSTANCE.enableLogsInProductionSdk(getReactApplicationContext(),true);
-    JSONObject data = new JSONObject();
-    Sharpsell.INSTANCE.initialize(
-        getReactApplicationContext(),
-        data,
-        new SuccessListener() {
-            @Override
-            public void onSuccess() {
-                Sharpsell.INSTANCE.open(getReactApplicationContext(), null);
+//Custom function that we are going to export to JS
+// Home Screen
+@ReactMethod
+public void getHomeScreen(String data) {
+    try{
+        Sharpsell.INSTANCE.enableLogsInProductionSdk(getReactApplicationContext(),true);
+        String objData = getData(data);
+        Sharpsell.INSTANCE.initialize(
+            getReactApplicationContext(),
+            objData,
+            new SuccessListener() {
+                @Override
+                public void onSuccess() {
+                    Sharpsell.INSTANCE.open(getReactApplicationContext(), null);
+                }
+            },
+            new ErrorListener<String>() {
+                @Override
+                public void onError(@Nullable String error) {
+                }
             }
-        },
-        new ErrorListener<String>() {
-            @Override
-            public void onError(@Nullable String error) {
-            }
-        }
-    );
+        );
     } catch (Exception e){
-}
+        e.printStackTrace();
+    }
+    
+};
+```
+
+And to call the above method from your app.js, here is a below example of our app.js file, `openHomePage` is a simple button
+which will give access to call `getHomeScreen(object)` method.
+
+```
+import messaging from '@react-native-firebase/messaging';
+
+<Button title='Open Home Page' onPress={openHomePage}></Button>
+
+const openHomePage = async () => {
+    const fcmToken = await messaging().getToken();
+    const data = await getUserInfo();
+    SharpSellSDK.getHomeScreen(data)
+  };
 ```
 
 #### Presentation Screen
