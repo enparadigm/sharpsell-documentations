@@ -3,8 +3,12 @@ title: "Using Sharpsell SDK in React Native"
 sidebar_position: 2
 slug: 'react_native_implementation'
 ---
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import ReactPlayer from 'react-player';
+
+
+<br></br>
+<ReactPlayer playing controls url='/videos/React_android_usage.mp4'/>
+<br></br>
 
 ## Step 1: Create the SharpSell Engine
 
