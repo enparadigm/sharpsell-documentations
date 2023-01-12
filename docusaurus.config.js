@@ -100,10 +100,10 @@ const config = {
       },
       algolia: {
         // If Algolia did not provide you any appId, use 'BH4D9OD16A'
-        appId: '8JNPSLXL9K',//'BH4D9OD16A',//'NS6GBGYACO', // Sharpsell - 8JNPSLXL9K
+        appId: 'BUOVNPAGP5',
         // Public API key: it is safe to commit it
-        apiKey: '1fac302cefcfddf32e6a9903d2be584d',//'8f0f11e3241b59574c5dd32af09acdc8',
-        indexName: 'hasura-graphql',
+        apiKey: 'f2f44ad23c91a0a70b7a1991e810cadc',
+        indexName: 'enparadigmtech',
         // Optional: see doc section below
         // contextualSearch: true,
         // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
