@@ -3,8 +3,15 @@ title: 'Setup'
 sidebar_position: 2
 slug: 'android_setup'
 ---
+import ReactPlayer from 'react-player';
 
 # Sharpsell SDK Integration
+
+<br></br>
+<ReactPlayer playing controls url='/videos/React_android_integration.mp4'/>
+<br></br>
+
+**[DOWNLOAD ANDROID DEMO PROJECT](https://github.com/enparadigm/AndroidSDKDEMO)**
 
 ## Pre-Requisites
 1. The application should be migrated to AndroidX. Check if the following line is present in the project level `gradle.properties`. If this line is not present, the project needs to be migrated to [androidX][https://developer.android.com/jetpack/androidx/migrate].

@@ -24,6 +24,14 @@ There is something called `<uses-sdk/>` contained in `<manifest>` which lets you
 
 </details>
 
+<details>
+<summary>Push notification not receiving?</summary>
+Check you have added the handle notification code or not on your onMessageReceived function from FirebaseMessagingService class.
+
+Find here - https://docs.enparadigmtech.com/platform/android/android_implementation#step-3-handling-notification
+
+</details>
+
 ### iOS
 
 <details>

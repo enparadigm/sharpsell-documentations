@@ -7,6 +7,13 @@ import ReactPlayer from 'react-player';
 
 # Sharpsell SDK Integration
 
+<ReactPlayer playing controls url='/videos/React_android_integration.mp4'/>
+
+<br></br>
+
+**[DOWNLOAD REACTNATIVE DEMO PROJECT](https://github.com/enparadigm/sharpsell_reactnative_full)**
+
+
 ## Pre-Requisites
 1. The application should be migrated to AndroidX. Check if the following line is present in the project level `gradle.properties`. If this line is not present, the project needs to be migrated to [androidX](https://developer.android.com/jetpack/androidx/migrate).
 
