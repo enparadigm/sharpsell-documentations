@@ -37,6 +37,7 @@ const config = {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           breadcrumbs: true,
+          includeCurrentVersion: false,
           // showLastUpdateAuthor: true,
           // showLastUpdateTime: true,
         },
@@ -73,9 +74,13 @@ const config = {
             label: 'SDK Integration',
           },
           {
-            type: 'search',
+            type: 'docsVersionDropdown',
             position: 'right',
           },
+          // {
+          //   type: 'search',
+          //   position: 'right',
+          // },
         ],
         
       },
@@ -98,19 +103,19 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
-      algolia: {
-        // If Algolia did not provide you any appId, use 'BH4D9OD16A'
-        appId: 'BUOVNPAGP5',
-        // Public API key: it is safe to commit it
-        apiKey: 'f2f44ad23c91a0a70b7a1991e810cadc',
-        indexName: 'enparadigmtech',
-        // Optional: see doc section below
-        // contextualSearch: true,
-        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
-        // externalUrlRegex: 'external\\.com|domain\\.com',
-        // Optional: Algolia search parameters
-        // searchParameters: {},
-      },
+      // algolia: {
+      //   // If Algolia did not provide you any appId, use 'BH4D9OD16A'
+      //   appId: 'BUOVNPAGP5',
+      //   // Public API key: it is safe to commit it
+      //   apiKey: 'f2f44ad23c91a0a70b7a1991e810cadc',
+      //   indexName: 'enparadigmtech',
+      //   // Optional: see doc section below
+      //   // contextualSearch: true,
+      //   // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+      //   // externalUrlRegex: 'external\\.com|domain\\.com',
+      //   // Optional: Algolia search parameters
+      //   // searchParameters: {},
+      // },
       // announcementBar: {
       //   id: 'announcementBar-3', // Increment on change
       //   content: `⭐️ If you like Sharpsell-docs, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/enparadigm/sharpsell-documentations">GitHub</a>`,

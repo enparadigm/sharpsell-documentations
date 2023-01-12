@@ -10,7 +10,7 @@ import ReactPlayer from 'react-player';
 <ReactPlayer playing controls url='/videos/React_android_usage.mp4'/>
 <br></br>
 
-**[Open React sample app](https://github.com/enparadigm/sharpsell_reactnative_full)**
+**[Open React sample app](https://github.com/enparadigm/sharpsell_android_sample)**
 
 ## Step 1: Create the SharpSell Engine
 

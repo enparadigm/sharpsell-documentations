@@ -11,7 +11,7 @@ import ReactPlayer from 'react-player';
 
 <br></br>
 
-**[Open React sample app](https://github.com/enparadigm/sharpsell_reactnative_full)**
+**[Open React sample app](https://github.com/enparadigm/sharpsell_android_sample)**
 
 
 ## Pre-Requisites
