@@ -9,8 +9,11 @@ import ReactPlayer from 'react-player';
 
 <!-- <form action="http://www.google.com" method="get" target="_blank"><button type="submit">IOS DEMO PROJECT</button></form> -->
 <br></br>
-<ReactPlayer playing controls url='/videos/React_android_usage.mp4'/>
+<ReactPlayer playing controls url='/videos/android_usage.mp4'/>
 <br></br>
+
+**[Open Android Sample App](https://github.com/enparadigm/AndroidSDKDEMO)**
+
 
 ## Step 1: Create the SharpSell Engine
 
@@ -506,7 +509,7 @@ Sharpsell.open(this@MainActivity, data.toString())
 
 ### Product Bundle Screen
 
-To open Sharpsell product bundle screen from your app use the below function
+To open the Sharpsell product bundle screen from your app use the below function
 
 ```mdx-code-block
 <Tabs>
