@@ -7,7 +7,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ReactPlayer from 'react-player';
 
-<!-- <form action="http://www.google.com" method="get" target="_blank"><button type="submit">IOS DEMO PROJECT</button></form> -->
 <br></br>
 <ReactPlayer playing controls url='/videos/android_usage.mp4'/>
 <br></br>
