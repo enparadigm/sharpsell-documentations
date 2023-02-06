@@ -376,7 +376,7 @@ Sharpsell.open(this@MainActivity, data.toString())
 
 ### Marketing Collateral Screen
 
-To open Sharpsell marketing collateral or a custom mapped directory screen from your app use the below function
+To open Sharpsell marketing collateral directory screen from your app use the below function
 
 ```mdx-code-block
 <Tabs>
@@ -386,7 +386,6 @@ To open Sharpsell marketing collateral or a custom mapped directory screen from 
 ```java
 JSONObject data = new JSONObject();
 data.put("route", "mcDirectory");
-data.put("entry_point", 1); // For custom mapped directory only 
 Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
 ```
 
@@ -398,7 +397,6 @@ Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
 ```kotlin
 val data = JSONObject()
 data.put("route", "mcDirectory")
-data.put("entry_point", 1); // For custom mapped directory only 
 Sharpsell.open(this@MainActivity, data.toString())
 ```
 
@@ -406,7 +404,6 @@ Sharpsell.open(this@MainActivity, data.toString())
 </TabItem>
 </Tabs>
 ```
-
 
 
 ### Poster of the day Screen
