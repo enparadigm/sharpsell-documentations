@@ -386,7 +386,12 @@ To open Sharpsell marketing collateral or a custom mapped directory screen from 
 ```java
 JSONObject data = new JSONObject();
 data.put("route", "mcDirectory");
-data.put("entry_point", 1); // For custom mapped directory only 
+
+// For custom mapped directory only 
+// Note - custom directories have to be mapped first to the entry point before implementing
+int entryPoint = 1;
+data.put("entry_point", entryPoint); 
+
 Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
 ```
 
@@ -398,7 +403,12 @@ Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
 ```kotlin
 val data = JSONObject()
 data.put("route", "mcDirectory")
-data.put("entry_point", 1); // For custom mapped directory only 
+
+// For custom mapped directory only 
+// Note - custom directories have to be mapped first to the entry point before implementing
+val entryPoint = 1;
+data.put("entry_point", entryPoint);
+
 Sharpsell.open(this@MainActivity, data.toString())
 ```
 

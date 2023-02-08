@@ -200,7 +200,12 @@ To open the Sharpsell marketing collateral or a custom mapped directory screen f
 ```
 JSONObject data = new JSONObject();
 data.put("route", "mc_directory");
-data.put("entry_point", 1);
+
+// For custom mapped directory only 
+// Note - custom directories have to be mapped first to the entry point before implementing
+int entryPoint = 1;
+data.put("entry_point", entryPoint); 
+
 Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```
 
