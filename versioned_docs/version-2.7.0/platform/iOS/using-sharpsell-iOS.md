@@ -207,9 +207,11 @@ To open the Sharpsell marketing collateral or a custom mapped directory screen f
      let mcDirArgs = ["route" : "mcDirectory"]
 
    
-    // For custom mapped directory only
-    // Note - custom directories have to be mapped first to the entry point before implementing
-     let entryPoint = 1
+     /* 
+     For custom mapped directory only 
+     Note - custom directories have to be mapped first to the entry point before implementing
+     This is a sample video, Sharpsell team will provide the value for entry_point
+     */
      mcDirArgs["entry_point"] = "1"
 
        Sharpsell.services.open(arguments: mcDirArgs){ (flutterViewController) in
