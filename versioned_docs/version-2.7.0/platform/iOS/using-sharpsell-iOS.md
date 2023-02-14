@@ -220,34 +220,6 @@ To open the Sharpsell marketing collateral directory screen from your app use th
         }
 ```
 
-#### Custom Marketing Collateral Directory Screen
-Sharpsell also has the ability to open a specific marketing collateral directory directly without going through the marketing collateral screen.
-To open the custom mappped directory screen from your app use the below function
-
-:::info
-
-Contact sharpsell team before integrating the custom directory as it has to be mapped first by them. They will provide you the value to pass in ``entry_point``.
-
-:::
-
-``swift
-     let mcDirArgs = ["route" : "mcDirectory"]
-     mcDirArgs["entry_point"] = "1" // sample
-
-       Sharpsell.services.open(arguments: mcDirArgs){ (flutterViewController) in
-            self.navigationController?.pushViewController(flutterViewController, animated: true)
-        } onFailure: { (errorMessage, smartSellError) in
-            switch smartSellError {
-            case .flutterError:
-                debugPrint("Error Message: \(errorMessage)")
-            case .flutterMethodNotImplemented:
-                debugPrint("")
-            default:
-                debugPrint("")
-            }
-        }
-```
-
 ### Poster of the day Screen
 To open the Sharpsell poster of the day screen from your app use the below function
 
@@ -267,6 +239,7 @@ To open the Sharpsell poster of the day screen from your app use the below funct
             }
 
 ```
+
 
 ### Digital Visiting Card Screen
 To open the Sharpsell digital visiting card screen from your app use the below function
