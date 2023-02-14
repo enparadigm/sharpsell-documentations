@@ -195,18 +195,31 @@ Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 
 
 ### Marketing Collateral Screen
-To open the Sharpsell marketing collateral or a custom mapped directory screen from your app use the below function
+To open the Sharpsell marketing collateral directory screen from your app use the below function
+
 
 ```
 JSONObject data = new JSONObject();
 data.put("route", "mc_directory");
 
-/* 
-For custom mapped directory only 
-Note - custom directories have to be mapped first to the entry point before implementing
-This is a sample video, Sharpsell team will provide the value for entry_point
-*/
-data.put("entry_point", 1); 
+Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
+```
+
+#### Custom Marketing Collateral Directory Screen
+Sharpsell also has the ability to open a specific directory directly without going through the marketing collateral.
+To open the custom mappped directory screen from your app use the below function
+
+:::info
+
+Contact sharpsell team before integrating the custom directory as it has to be mapped first by them. They will provide you the value to pass in ``entry_point``.
+
+:::
+
+```
+JSONObject data = new JSONObject();
+data.put("route", "mc_directory");
+
+data.put("entry_point", 1); //sample
 
 Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```

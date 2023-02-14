@@ -201,18 +201,38 @@ To open the Sharpsell launchpad screen from your app use the below function
 ```
 
 ### Marketing Collateral Screen
-To open the Sharpsell marketing collateral or a custom mapped directory screen from your app use the below function
+To open the Sharpsell marketing collateral directory screen from your app use the below function
 
 ```swift
      let mcDirArgs = ["route" : "mcDirectory"]
 
-   
-     /* 
-     For custom mapped directory only 
-     Note - custom directories have to be mapped first to the entry point before implementing
-     This is a sample video, Sharpsell team will provide the value for entry_point
-     */
-     mcDirArgs["entry_point"] = "1"
+       Sharpsell.services.open(arguments: mcDirArgs){ (flutterViewController) in
+            self.navigationController?.pushViewController(flutterViewController, animated: true)
+        } onFailure: { (errorMessage, smartSellError) in
+            switch smartSellError {
+            case .flutterError:
+                debugPrint("Error Message: \(errorMessage)")
+            case .flutterMethodNotImplemented:
+                debugPrint("")
+            default:
+                debugPrint("")
+            }
+        }
+```
+
+#### Custom Marketing Collateral Directory Screen
+Sharpsell also has the ability to open a specific marketing collateral directory directly without going through the marketing collateral screen.
+To open the custom mappped directory screen from your app use the below function
+
+:::info
+
+Contact sharpsell team before integrating the custom directory as it has to be mapped first by them. They will provide you the value to pass in ``entry_point``.
+
+:::
+
+``swift
+     let mcDirArgs = ["route" : "mcDirectory"]
+     mcDirArgs["entry_point"] = "1" // sample
 
        Sharpsell.services.open(arguments: mcDirArgs){ (flutterViewController) in
             self.navigationController?.pushViewController(flutterViewController, animated: true)

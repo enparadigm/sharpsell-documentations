@@ -376,7 +376,7 @@ Sharpsell.open(this@MainActivity, data.toString())
 
 ### Marketing Collateral Screen
 
-To open Sharpsell marketing collateral or a custom mapped directory screen from your app use the below function
+To open Sharpsell marketing collateral directory screen from your app use the below function
 
 ```mdx-code-block
 <Tabs>
@@ -386,13 +386,6 @@ To open Sharpsell marketing collateral or a custom mapped directory screen from 
 ```java
 JSONObject data = new JSONObject();
 data.put("route", "mcDirectory");
-
-/* 
-For custom mapped directory only 
-Note - custom directories have to be mapped first to the entry point before implementing
-This is a sample video, Sharpsell team will provide the value for entry_point
-*/
-data.put("entry_point", 1); 
 
 Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
 ```
@@ -406,11 +399,6 @@ Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
 val data = JSONObject()
 data.put("route", "mcDirectory")
 
-// For custom mapped directory only 
-// Note - custom directories have to be mapped first to the entry point before implementing
-val entryPoint = 1;
-data.put("entry_point", entryPoint);
-
 Sharpsell.open(this@MainActivity, data.toString())
 ```
 
@@ -419,6 +407,46 @@ Sharpsell.open(this@MainActivity, data.toString())
 </Tabs>
 ```
 
+#### Custom Marketing Collateral Directory Screen
+Sharpsell also has the ability to open a specific marketing collateral directory directly without going through the marketing collateral screen.
+To open the custom mappped directory screen from your app use the below function
+
+:::info
+
+Contact sharpsell team before integrating the custom directory as it has to be mapped first by them. They will provide you the value to pass in ``entry_point``.
+
+:::
+
+```mdx-code-block
+<Tabs>
+<TabItem value="Java">
+```
+
+```java
+JSONObject data = new JSONObject();
+data.put("route", "mcDirectory");
+data.put("entry_point", 1); // sample
+
+Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Kotlin">
+```
+
+```kotlin
+val data = JSONObject()
+data.put("route", "mcDirectory")
+data.put("entry_point", 1) // sample
+
+Sharpsell.open(this@MainActivity, data.toString())
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
 
 
 ### Poster of the day Screen
