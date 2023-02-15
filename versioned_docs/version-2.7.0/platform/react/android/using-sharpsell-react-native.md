@@ -193,22 +193,14 @@ data.put("route", "launchpad");
 Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```
 
-
 ### Marketing Collateral Screen
-To open the Sharpsell marketing collateral or a custom mapped directory screen from your app use the below function
+To open the Sharpsell marketing collateral directory screen from your app use the below function
 
 ```
 JSONObject data = new JSONObject();
 data.put("route", "mc_directory");
-
-// For custom mapped directory only 
-// Note - custom directories have to be mapped first to the entry point before implementing
-int entryPoint = 1;
-data.put("entry_point", entryPoint); 
-
 Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```
-
 
 ### Poster of the day Screen
 To open the Sharpsell poster of the day screen from your app use the below function
