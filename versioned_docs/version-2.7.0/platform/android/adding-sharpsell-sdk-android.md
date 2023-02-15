@@ -8,7 +8,7 @@ import ReactPlayer from 'react-player';
 # Sharpsell SDK Integration in Android
 
 <br></br>
-<ReactPlayer playing controls url='/videos/android_intgration.mp4'/>
+<ReactPlayer playing controls url='/videos/android_integration.mp4'/>
 <br></br>
 
 **[Open Android Sample App](https://github.com/enparadigm/AndroidSDKDEMO)**

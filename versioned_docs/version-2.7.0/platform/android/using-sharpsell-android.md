@@ -7,7 +7,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ReactPlayer from 'react-player';
 
-<!-- <form action="http://www.google.com" method="get" target="_blank"><button type="submit">IOS DEMO PROJECT</button></form> -->
 <br></br>
 <ReactPlayer playing controls url='/videos/android_usage.mp4'/>
 <br></br>
@@ -377,7 +376,7 @@ Sharpsell.open(this@MainActivity, data.toString())
 
 ### Marketing Collateral Screen
 
-To open Sharpsell marketing collateral directory screen from your app use the below function
+To open Sharpsell marketing collateral or a custom mapped directory screen from your app use the below function
 
 ```mdx-code-block
 <Tabs>
@@ -387,6 +386,12 @@ To open Sharpsell marketing collateral directory screen from your app use the be
 ```java
 JSONObject data = new JSONObject();
 data.put("route", "mcDirectory");
+
+// For custom mapped directory only 
+// Note - custom directories have to be mapped first to the entry point before implementing
+int entryPoint = 1;
+data.put("entry_point", entryPoint); 
+
 Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
 ```
 
@@ -398,6 +403,12 @@ Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
 ```kotlin
 val data = JSONObject()
 data.put("route", "mcDirectory")
+
+// For custom mapped directory only 
+// Note - custom directories have to be mapped first to the entry point before implementing
+val entryPoint = 1;
+data.put("entry_point", entryPoint);
+
 Sharpsell.open(this@MainActivity, data.toString())
 ```
 
