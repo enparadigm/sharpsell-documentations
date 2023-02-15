@@ -5,7 +5,7 @@ slug: 'android_setup'
 ---
 import ReactPlayer from 'react-player';
 
-# Sharpsell SDK Integration Android
+# Sharpsell SDK Integration in Android
 
 <br></br>
 <ReactPlayer playing controls url='/videos/android_intgration.mp4'/>
