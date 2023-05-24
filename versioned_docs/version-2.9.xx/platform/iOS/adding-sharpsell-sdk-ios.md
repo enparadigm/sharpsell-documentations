@@ -13,6 +13,9 @@ import ReactPlayer from 'react-player';
 
 
 <ReactPlayer playing controls url='/videos/iOS_setup.mp4'/>
+<br></br>
+
+**[Open iOS Sample App](https://github.com/enparadigm/sharpsell_iOS_sample)**
 
 
 ## Needed User Permissions
@@ -77,7 +80,7 @@ There are 2 steps involved in adding the Sharpsell SDK to your project.
    ![Adding Sharpsell SDK using the swift package manager ](./assets/spm.png)
 
 
-2. Choose Branch in the Dependency Rule then click choose "UpTo Next Major" in the versions and add **2.7.0** as a major version,
+2. Choose Branch in the Dependency Rule then click choose "UpTo Next Major" in the versions and add **2.9.4** as a major version,
    then click Add Package button. This will add the Sharpsell framework as a package dependency for
    your app
 
