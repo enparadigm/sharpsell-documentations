@@ -5,13 +5,6 @@ slug: 'android_implementation'
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ReactPlayer from 'react-player';
-
-<br></br>
-<ReactPlayer playing controls url='/videos/android_usage.mp4'/>
-<br></br>
-
-**[Open Android Sample App](https://github.com/enparadigm/sharpsell_android_sample)**
 
 
 ## Step 1: Create the SharpSell Engine
@@ -70,38 +63,11 @@ A sample code on how to initialize the SDK is given below.
 // sample user meta data
 // this data can be used to update or create user meta details, if you don't have user meta then pass it as empty string
 
-val userMeta = JSONObject()
-userMeta.put("user_category", "user_Category")
-userMeta.put("unique_id", "11111111")
-userMeta.put("location_code","loc_Id")
-userMeta.put("so_code", "11")
-userMeta.put("ro_code", "1111")
-userMeta.put("name", "Test User")
-userMeta.put("doj", "date")
-userMeta.put("employee_code", "12345")
-userMeta.put("business_unit", "Micro Business Loan")
-userMeta.put("designation", "DST11")
-userMeta.put("state", "state_Name")
-userMeta.put("city", "city_Name")
-userMeta.put("zone", "zone_Name")
-userMeta.put("cluster", "Belgaum")
-userMeta.put("branch", "branch_Id")
-userMeta.put("status", "ACTIVE")
-userMeta.put("branch_name", "branch_Name")
-userMeta.put("reporting_manager", "test9@test9.com")
-userMeta.put("bu_type", "URBAN")
-userMeta.put("user_type","user_Type")
 
 JSONObject data = new JSONObject();
 data.put("company_code", "company Code"); // Company code given to you by sharpsell team
-data.put("user_unique_id", "unique ser identifier"); // Pass the unique id which is releated to the particular user
-data.put("user_group_id", 1);  // User Group ID given to you by sharpsell team
-data.put("country_code", "");
-data.put("user_meta", userMeta.toString())  // If you have user meta, pass those as a string. 
-// data.put("user_meta", "") // If you don't have user meta then pass empty string as a value
-data.put("name", "Test User"); // Pass the user name who is trying to login
-data.put("mobile_number", "8888888888");  // Pass the user mobile number who is trying to login
-data.put("email", "test@test.com"); // Pass the user email id whoc is trying to login, if you were not maintaing then pass it as empty string
+data.put("sharpsell_api_key", "sharpsell api key"); // API Key given by the sharpsell team
+data.put("user_unique_id", "");  // User unique id or user external id which is the id of the user which you are trying to login
 //Pass the below key to enable push notification to be recived on your device
 data.put("fcm_token", fcmToken);
 
@@ -133,37 +99,11 @@ Sharpsell.INSTANCE.initialize(
 // sample user meta data
 // this data can be used to update or create user meta details, if you don't have user meta then pass it as empty string
 
-val userMeta = JSONObject()
-userMeta.put("user_category", "user_Category")
-userMeta.put("unique_id", "11111111")
-userMeta.put("location_code","loc_Id")
-userMeta.put("so_code", "11")
-userMeta.put("ro_code", "1111")
-userMeta.put("name", "Test User")
-userMeta.put("doj", "date")
-userMeta.put("employee_code", "12345")
-userMeta.put("business_unit", "Micro Business Loan")
-userMeta.put("designation", "DST11")
-userMeta.put("state", "state_Name")
-userMeta.put("city", "city_Name")
-userMeta.put("zone", "zone_Name")
-userMeta.put("cluster", "Belgaum")
-userMeta.put("branch", "branch_Id")
-userMeta.put("status", "ACTIVE")
-userMeta.put("branch_name", "branch_Name")
-userMeta.put("reporting_manager", "test9@test9.com")
-userMeta.put("bu_type", "URBAN")
-userMeta.put("user_type","user_Type")
 
 val data = JSONObject()
-data.put("company_code", companyCode);
-data.put("user_unique_id", "unique user identifier");
-data.put("user_group_id", user_group_id); //int value
-data.put("country_code", null)
-data.put("user_meta", userMeta.toString())
-data.put("name", "Test Name")
-data.put("mobile_number", "8888888888")
-data.put("email", "test@test.com")
+data.put("company_code", "company Code"); // Company code given to you by sharpsell team
+data.put("sharpsell_api_key", "sharpsell api key"); // API Key given by the sharpsell team
+data.put("user_unique_id", "");  // User unique id or user external id which is the id of the user which you are trying to login
 //Pass the below key to enable push notification to be recived on your device
 data.put("fcm_token", fcmToken);
 
@@ -196,7 +136,7 @@ Sharpsell.initialize(
 :::note
 Sharpsell team will provide the following items.
 1. company_code
-2. user_group_id
+2. sharpsell_api_key
 :::
 
 ## Step 3: Handling Notification
@@ -413,7 +353,7 @@ To open the custom mappped directory screen from your app use the below function
 
 :::info
 
-Contact sharpsell team before integrating the custom directory as it has to be mapped first by them. They will provide you the value to pass in ``entry_point``.
+Contact sharpsell team before integrating the custom directory as it has to be mapped first by them. They will provide you the value to pass in ``app_url``.
 
 :::
 
@@ -425,7 +365,7 @@ Contact sharpsell team before integrating the custom directory as it has to be m
 ```java
 JSONObject data = new JSONObject();
 data.put("route", "mcDirectory");
-data.put("entry_point", 1); // value added here is for sample
+data.put("app_url", ""); // value added here is for sample and sharpsell team can you help you getting the custom url 
 
 Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
 ```
@@ -438,7 +378,7 @@ Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
 ```kotlin
 val data = JSONObject()
 data.put("route", "mcDirectory")
-data.put("entry_point", 1) // value added here is for sample
+data.put("app_url", "") // value added here is for sample
 
 Sharpsell.open(this@MainActivity, data.toString())
 ```

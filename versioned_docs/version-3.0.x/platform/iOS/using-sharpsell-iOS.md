@@ -3,7 +3,6 @@ title: "Using Sharpsell SDK in iOS"
 sidebar_position: 2
 slug: 'iOS_implementation'
 ---
-import ReactPlayer from 'react-player';
 
 
 :::note
