@@ -66,8 +66,8 @@ A sample code on how to initialize the SDK is given below.
 
 JSONObject data = new JSONObject();
 data.put("company_code", "company Code"); // Company code given to you by sharpsell team
-data.put("sharpsell_api_key", "sharpsell api key"); // API Key given by the sharpsell team
-data.put("user_unique_id", "");  // User unique id or user external id which is the id of the user which you are trying to login
+data.put("X-SHARPSELL-API-KEY", "sharpsell api key"); // API Key given by the sharpsell team
+data.put("X-SHARPSELL-ID", "");  // User unique id or user external id which is the id of the user which you are trying to login
 //Pass the below key to enable push notification to be recived on your device
 data.put("fcm_token", fcmToken);
 
