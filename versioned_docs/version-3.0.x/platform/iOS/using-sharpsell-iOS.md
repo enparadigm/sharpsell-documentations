@@ -37,8 +37,8 @@ A sample code on how to initialize the SDK is given below.
        // Note - If you don't have any of the below data then don't pass null, just pass empty strings
         let initSharpsellData: [String:Any] = [
             "company_code": "sample_sdk", // Company code given to you by sharpsell team
-            "X-SHARPSELL-API-KEY": "", //  API Key given by the sharpsell team
-            "X-SHARPSELL-ID": "unique_id_of_the_user", // User unique id or user external id which is the id of the user which you are trying to login
+            "sharpsell_api_key": "", //  API Key given by the sharpsell team
+            "user_unique_id": "unique_id_of_the_user", // User unique id or user external id which is the id of the user which you are trying to login
              "fcm_token": firebaseToken] // Pass the firebase token 
 
         Sharpsell.services.initialize(smartsellParameters: initSharpsellData) {
