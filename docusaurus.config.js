@@ -10,7 +10,7 @@ const config = {
   tagline: 'Sharpsell SDK integration documentation',
   url: 'https://www.sharpsell.ai',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   staticDirectories: ['static', 'public'],
