@@ -1,3 +1,19 @@
+.prism-code code {
+  background-color: var(--color-gray-4);
+  .theme-code-block-highlighted-line {
+    background-color: var(--color-gray-12);
+  }
+}
+
+html[data-theme="dark"] {
+  .prism-code code {
+    background-color: var(--color-gray-86);
+    .theme-code-block-highlighted-line {
+      background-color: var(--color-gray-78);
+    }
+  }
+}
+
 theme-doc-breadcrumbs {
   .breadcrumbs {
     .breadcrumbs__item {
@@ -37,7 +53,6 @@ pre code {
   background-color: var(--ifm-code-background);
 }
 
-
 .prism-code code {
   background-color: var(--color-gray-4);
   .theme-code-block-highlighted-line {
@@ -45,7 +60,7 @@ pre code {
   }
 }
 
-html[data-theme='dark'] {
+html[data-theme="dark"] {
   .prism-code code {
     background-color: var(--color-gray-86);
     .theme-code-block-highlighted-line {
@@ -54,12 +69,11 @@ html[data-theme='dark'] {
   }
 }
 
-html[data-theme='dark'] {
+html[data-theme="dark"] {
   code {
     background-color: var(--color-gray-78);
   }
 }
-
 
 .theme-edit-this-page {
   display: flex;
@@ -73,7 +87,7 @@ html[data-theme='dark'] {
 
   &::before,
   &::after {
-    content: '';
+    content: "";
     display: inline-block;
     transform: translateX(0);
     transition: transform var(--ifm-transition-fast) linear;
@@ -88,7 +102,7 @@ html[data-theme='dark'] {
 
   &::after {
     margin-left: 0.25rem;
-    background: url('/img/arrow_right.svg') no-repeat;
+    background: url("/img/arrow_right.svg") no-repeat;
     width: 1rem;
     height: 1rem;
     margin-bottom: -0.25rem;
@@ -128,9 +142,9 @@ html[data-theme='dark'] {
 
     &:first-child .pagination-nav__label::before,
     &--next .pagination-nav__label::after {
-      content: '';
+      content: "";
       display: inline-block;
-      background: url('/img/arrow_right.svg') no-repeat;
+      background: url("/img/arrow_right.svg") no-repeat;
       width: 1rem;
       height: 1rem;
       margin-bottom: -0.2rem;
@@ -166,7 +180,7 @@ html[data-theme='dark'] {
 
 /* Dark Mode Styles */
 
-html[data-theme='dark'] {
+html[data-theme="dark"] {
   .pagination-nav {
     .pagination-nav__link {
       &:not(:empty) {
@@ -181,7 +195,8 @@ html[data-theme='dark'] {
         }
       }
 
-      &:first-child .pagination-nav__label::before, &--next .pagination-nav__label::after {
+      &:first-child .pagination-nav__label::before,
+      &--next .pagination-nav__label::after {
         background: url("/icons/arrow_right-light.svg") no-repeat;
       }
 
@@ -192,7 +207,8 @@ html[data-theme='dark'] {
   }
 
   .theme-edit-this-page {
-    &::before, &::after {
+    &::before,
+    &::after {
       filter: invert(1);
     }
 
