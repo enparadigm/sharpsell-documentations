@@ -33,13 +33,47 @@ The SDK has to be initialized before calling any other methods of the SDK.
 On calling the `Sharpsell.services.initialize` method, a success or failure status will be returned via a callback.
 A sample code on how to initialize the SDK is given below.
 
+
+:::note
+You can pass user fields with initialising the sdk to update user details.
+Create a json object with user fields and pass it inside the initialize function.
+
+**Please confirm user fields with sharpsell team before passing it.**
+```swift
+var metaData = [String: Any]()
+metaData["designation"] = ""
+metaData["branch"] = ""
+metaData["is_reviewer"] = ""
+metaData["date"] = ""
+
+var reportingData = [String: Any]()
+reportingData["identifier_type"] = ""
+reportingData["identifier_value"] = ""
+
+var fields = [String: Any]()
+fields["first_name"] = ""
+fields["last_name"] = ""
+fields["identifier_type"] = ""
+fields["phone"] = ""
+fields["email"] = ""
+fields["external_unique_id"] = ""
+fields["profile_image_url"] = ""
+fields["user_meta_data"] = metaData
+fields["reporting_to"] = reportingData
+```
+:::
+
+### Call the below function to initialize the SDK
+
 ```swift
        // Note - If you don't have any of the below data then don't pass null, just pass empty strings
         let initSharpsellData: [String:Any] = [
             "company_code": "sample_sdk", // Company code given to you by sharpsell team
             "sharpsell_api_key": "", //  API Key given by the sharpsell team
             "user_unique_id": "unique_id_of_the_user", // User unique id or user external id which is the id of the user which you are trying to login
-             "fcm_token": firebaseToken] // Pass the firebase token 
+            "fcm_token": firebaseToken, // Pass the firebase token            
+             "user_details": fields] //Only pass the user_details key if you want to update user fields
+              
 
         Sharpsell.services.initialize(smartsellParameters: initSharpsellData) {
             //Flutter initialized succecfully
