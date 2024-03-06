@@ -36,7 +36,7 @@ allprojects {
         maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com" }
         maven {
-            url 'http://artifactory.enparadigm.com/artifactory/sharpsell'
+            url 'https://artifactory.sharpselltech.com/artifactory/sharpsell_sdk'
             credentials {
                 username = artifactory_username
                 password = artifactory_password
