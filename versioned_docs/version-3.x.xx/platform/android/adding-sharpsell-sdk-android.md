@@ -74,7 +74,7 @@ dependencies {
 }
 ```
 
-3. Add the following lines to the app-level `proguard-rules.pro` file if you have one.
+3. if you are using proguard rules in your app please add the below rules to you `proguard-rules.pro` file because it is not a mandatory step.
 ```
 # Flutter
 -keep class io.flutter.app.** { *; }
@@ -85,11 +85,6 @@ dependencies {
 -keep class com.enparadigm.sharpsell.**  { *; }
 
 ## Keep the FlutterApplication and its onCreate method
-#-keep public class com.enparadigm.sharpsell.SharpsellPlugin {
-#    public void onCreate();
-#}
-
-# Add any other necessary rules to keep additional classes or resources
 
 # Keep classes and methods annotated with @Keep
 -keep @androidx.annotation.Keep class *
@@ -100,7 +95,6 @@ dependencies {
 
 You need the following lines too to your app-level `build.gradle` file for the proguard rules.
 ```gradle
-minifyEnabled true
 proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 ```
 
