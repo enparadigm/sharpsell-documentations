@@ -84,8 +84,6 @@ dependencies {
 -keep class io.flutter.**  { *; }
 -keep class com.enparadigm.sharpsell.**  { *; }
 
-## Keep the FlutterApplication and its onCreate method
-
 # Keep classes and methods annotated with @Keep
 -keep @androidx.annotation.Keep class *
 -keepclassmembers @androidx.annotation.Keep class * { *; }
