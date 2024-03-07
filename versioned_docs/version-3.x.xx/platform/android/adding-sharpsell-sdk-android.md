@@ -74,7 +74,7 @@ dependencies {
 }
 ```
 
-3. if you are using proguard rules in your app please add the below rules to you `proguard-rules.pro` file because it is not a mandatory step.
+1. if you are using proguard rules in your app please add the below rules to your `proguard-rules.pro` file (It is not a mandatory step).
 ```
 # Flutter
 -keep class io.flutter.app.** { *; }
