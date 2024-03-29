@@ -17,9 +17,9 @@ import ReactPlayer from 'react-player';
 
 ## Pre-Requisites
 
-1. Xcode 13.4.1 or later.
+1. Xcode 14.1 or later.
 
-2. The minimum iOS version supported by Sharpsell is iOS `12.0`
+2. The minimum iOS version supported by Sharpsell is iOS `13.0`
 
 3. Firebase should be enabled and the `GoogleService-Info.plist` file should be properly setup.
 
@@ -31,6 +31,8 @@ To set up iOS firebase setup follow this - https://firebase.google.com/docs/ios/
 ## Needed User Permissions
 
 Sharpsell needs some user permissions like gallery, camera access etc, to use the desired items on the app for various features. Permission will be asked only before accessing it.
+
+<b>All mentioned keys are expected to be added in on info.plist file. <b>
 
 Below we have mentioned what all the permissions will be needed and the reason for that.
 
@@ -56,10 +58,18 @@ We want permission to access your camera to set your profile picture, set images
 
 <details>
 <summary><b>LSApplicationQueriesSchemes</b></summary>
+Below are the two queery scheme expected to be added in the LSApplicationQueriesSchemes
+
+<b>whatsapp</b>
+<b>sharpsell</b>
 
 Add <b>whatsapp</b> to the array of query scheme
 
 We need this Application Queries Schemes to open WhatsApp to send messages to customers with the click of the WhatsApp share button.
+
+Add <b>sharpsell</b> to the array of query scheme
+
+We need this Application Queries Schemes for deeplink to work in the integrated app.
 
 </details>
 
@@ -68,6 +78,20 @@ We need to add all the above user permission to your `info.plist` file. If not y
 
 Please go through the sample app info.plist file, if you want some examples of how to add this permission on iOS
 :::
+
+## Adding Associated domains
+
+We need add the our domain name to make the deeplink work in the integrated app.
+
+To add the associated domain follow the below steps,
+1. Natvigate to your target and click on Signing & Capabilities 
+2. Click on (+ Capability) button and once it is clicked it will add the Associated domain.
+3. In Associated domain, click on the (+) button. And the given applink domain name in the text box and click on enter.
+
+:::note
+Sharpsell team will provide you the domain name which needs to be added in the associated domain
+:::
+
 
 ## Installation
 
