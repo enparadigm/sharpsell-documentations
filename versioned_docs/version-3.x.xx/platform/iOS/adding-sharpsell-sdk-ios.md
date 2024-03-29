@@ -57,16 +57,35 @@ We want permission to access your camera to set your profile picture, set images
 <details>
 <summary><b>LSApplicationQueriesSchemes</b></summary>
 
-Add <b>whatsapp</b> to the array of query scheme
+Below are the two queery scheme expected to be added in the LSApplicationQueriesSchemes
 
+1. <b>whatsapp</b>
+2. <b>sharpsell</b>
+
+Add <b>whatsapp</b> to the array of query scheme
 We need this Application Queries Schemes to open WhatsApp to send messages to customers with the click of the WhatsApp share button.
 
+Add <b>sharpsell</b> to the array of query scheme
+We need this Application Queries Schemes for deeplink to work in the integrated app.
 </details>
 
 :::warning Adding user permission in info.plist
 We need to add all the above user permission to your `info.plist` file. If not you may get rejections while updloading the app to the AppStore connect.
 
 Please go through the sample app info.plist file, if you want some examples of how to add this permission on iOS
+:::
+
+## Adding Associated domains
+
+We need add the domains to make the deeplink work in the integrated app.
+
+To add the associated domain follow the below steps,
+1. Natvigate to your target and click on Signing & Capabilities 
+2. Click on (+ Capability) button and once it is clicked it will add the Associated domain.
+3. In Associated domain, click on the (+) button. And the given applink domain name in the text box and click on enter.
+
+:::note
+Sharpsell team will provide you the domain name which needs to be added in the associated domain
 :::
 
 ## Installation
