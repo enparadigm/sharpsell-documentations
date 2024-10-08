@@ -69,9 +69,10 @@ fields["reporting_to"] = reportingData
        // Note - If you don't have any of the below data then don't pass null, just pass empty strings
         let initSharpsellData: [String:Any] = [
             "company_code": "sample_sdk", // Company code given to you by sharpsell team
+            "base_url": "", //This is non mandatory field. Check with sharpsell team if you need pass this value for your company or not.If yes, sharpsell team will provide this information. 
             "sharpsell_api_key": "", //  API Key given by the sharpsell team
             "user_unique_id": "unique_id_of_the_user", // User unique id or user external id which is the id of the user which you are trying to login
-            "fcm_token": firebaseToken, // Pass the firebase token            
+            "fcm_token": firebaseToken, // Pass the firebase token which will be used of push notification          
              "user_details": fields] //Only pass the user_details key if you want to update user fields
               
 
@@ -92,7 +93,8 @@ fields["reporting_to"] = reportingData
 :::info
 Sharpsell team will provide the following items.
 1. company_code
-2. user_group_id
+2. sharpsell_api_key
+3. base_url (If mandatory)
 :::
 
 ## Step 3: Handling Notification

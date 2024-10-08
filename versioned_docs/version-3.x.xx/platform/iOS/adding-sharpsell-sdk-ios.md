@@ -17,9 +17,9 @@ import ReactPlayer from 'react-player';
 
 ## Pre-Requisites
 
-1. Xcode 13.4.1 or later.
+1. Xcode 15 or later.
 
-2. The minimum iOS version supported by Sharpsell is iOS `12.0`
+2. The minimum iOS version supported by Sharpsell is iOS `13.0`
 
 3. Firebase should be enabled and the `GoogleService-Info.plist` file should be properly setup.
 
@@ -109,7 +109,7 @@ There are 2 steps involved in adding the Sharpsell SDK to your project.
    ![Adding Sharpsell SDK using the swift package manager ](./assets/spm.png)
 
 
-2. Choose Branch in the Dependency Rule then click choose "UpTo Next Major" in the versions and add **2.7.0** as a major version,
+2. Choose Branch in the Dependency Rule then click choose "Exact Version" in the versions and add the version number which is given by sharpsell team ,
    then click Add Package button. This will add the Sharpsell framework as a package dependency for
    your app
 
@@ -122,7 +122,6 @@ There are 2 steps involved in adding the Sharpsell SDK to your project.
    - App.xcframework
    - Flutter.xcframework
    - FBLPromises.xcframework
-   - FMDB.xcframework
 
 
 3. To run in iOS Simulators, we need to use debug version. So, if you are testing the app in the simulator then use XCFramrworks which is available in Debug Folder.
