@@ -14,8 +14,6 @@ import ReactPlayer from 'react-player';
 **[Open React sample app](https://github.com/enparadigm/sharpsell_android_sample)**
 
 
-
-
 ## Pre-Requisites
 1. The application should be migrated to AndroidX. Check if the following line is present in the project level `gradle.properties`. If this line is not present, the project needs to be migrated to [androidX](https://developer.android.com/jetpack/androidx/migrate).
 

@@ -8,6 +8,12 @@ import ReactPlayer from 'react-player';
 
 # Sharpsell iOS SDK
 
+<br></br>
+
+**[Open React sample app](https://github.com/enparadigm/sharpsell_android_sample)**
+
+
+
 
 :::note
 Follow the below mentioned steps on .xcworkspace file which is generated for iOS.
