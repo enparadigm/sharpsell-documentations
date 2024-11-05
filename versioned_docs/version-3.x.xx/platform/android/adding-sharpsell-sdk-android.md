@@ -74,6 +74,10 @@ dependencies {
 }
 ```
 
+:::info
+Sharpsell team will give the SDK version which needs to be added in the implementation. 
+:::
+
 1. if you are using proguard rules in your app please add the below rules to your `proguard-rules.pro` file (It is not a mandatory step).
 ```
 # Flutter
