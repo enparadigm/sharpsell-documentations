@@ -7,7 +7,7 @@ slug: /
 
 ## Sharpsell
 
-King of **Sales Playbook Automation Platform**.
+Empowering **Sales Teams** with **Playbook Automation**
 
 :::info[**about**]
 Transform every seller into a `sales champion`
