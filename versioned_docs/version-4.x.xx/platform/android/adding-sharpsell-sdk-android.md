@@ -8,13 +8,26 @@ import ReactPlayer from 'react-player';
 # Sharpsell SDK Integration
 
 <br></br>
-<ReactPlayer playing controls url='/videos/android_integration.mp4'/>
+<ReactPlayer playing controls url='/videos/androd_intgration.mp4'/>
 <br></br>
 
 **[Open Android Sample App](https://github.com/enparadigm/sharpsell_android_sample)**
 
-:::note
-Our SDK supports the following android processors - 'armeabi-v7a', 'arm64-v8a',   'x86_64'
+## Pre-Requisites
+1. The application should be migrated to AndroidX. Check if the following line is present in the project level `gradle.properties`. If this line is not present, the project needs to be migrated to [androidX][https://developer.android.com/jetpack/androidx/migrate].
+
+```gradle
+android.useAndroidX=true
+```
+2. The minimum android SDK version should be at least 21.
+```gradle
+minSdkVersion 21
+```
+3. Firebase should be enabled and the `google-seriveces.json` file should be properly set up.
+
+:::tip Firebase setup
+Firebase setup has to be done to enable push notification and analytics on Sharpsell SDK.
+To set up android firebase setup follow this - https://firebase.google.com/docs/android/setup
 :::
 
 <!-- ## Needed User Permissions 
@@ -36,7 +49,7 @@ allprojects {
         maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com" }
         maven {
-            url 'https://artifactory.sharpselltech.com/artifactory/sharpsell_sdk'
+            url 'http://artifactory.enparadigm.com/artifactory/sharpsell'
             credentials {
                 username = artifactory_username
                 password = artifactory_password
@@ -63,7 +76,7 @@ android {
 
 dependencies {
     // The SDK has been tested with these firebase versions
-    implementation platform('com.google.firebase:firebase-bom:28.3.0')
+    implementation platform('com.google.firebase:firebase-bom:32.7.3')
     implementation 'com.google.firebase:firebase-messaging-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
@@ -74,34 +87,5 @@ dependencies {
 }
 ```
 
-:::info
-Sharpsell team will give the SDK version which needs to be added in the implementation. 
-:::
-
-1. if you are using proguard rules in your app please add the below rules to your `proguard-rules.pro` file (It is not a mandatory step).
-```
-# Flutter
--keep class io.flutter.app.** { *; }
--keep class io.flutter.plugin.**  { *; }
--keep class io.flutter.util.**  { *; }
--keep class io.flutter.view.**  { *; }
--keep class io.flutter.**  { *; }
--keep class com.enparadigm.sharpsell.**  { *; }
-
-# Keep classes and methods annotated with @Keep
--keep @androidx.annotation.Keep class *
--keepclassmembers @androidx.annotation.Keep class * { *; }
-
-# Add any other specific rules for your native Android code and dependencies
-```
-
-You need the following lines too to your app-level `build.gradle` file for the proguard rules.
-```gradle
-proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-```
-
-:::info
-To refer FAQ if any issue occur [click here](/faq#integration-issues)
-:::
 
 [https://developer.android.com/jetpack/androidx/migrate]: https://developer.android.com/jetpack/androidx/migrate

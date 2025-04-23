@@ -3,7 +3,11 @@ title: "Using Sharpsell SDK in iOS"
 sidebar_position: 2
 slug: 'iOS_implementation'
 ---
+import ReactPlayer from 'react-player';
 
+<br></br>
+<ReactPlayer playing controls url='/videos/iOS_usage.mp4'/>
+<br></br><br></br>
 
 :::note
 `Import SharpsellCore` in the class or struct where ever you are trying to access Sharpsell.
@@ -37,9 +41,13 @@ A sample code on how to initialize the SDK is given below.
        // Note - If you don't have any of the below data then don't pass null, just pass empty strings
         let initSharpsellData: [String:Any] = [
             "company_code": "sample_sdk", // Company code given to you by sharpsell team
-            "sharpsell_api_key": "", //  API Key given by the sharpsell team
-              "base_url": "", //This is non mandatory field. Check with sharpsell team if you need pass this value for your company or not.If yes, sharpsell team will provide this information. 
-            "user_unique_id": "unique_id_of_the_user", // User unique id or user external id which is the id of the user which you are trying to login
+            "user_unique_id": "unique_id_of_the_user", // Pass the unique id which is releated to the particular user
+            "user_group_id": "1", // User Group ID given to you by sharpsell team
+            "country_code": "",
+            "user_meta": "", // If you have user meta, pass those as a string. If not pass empty string
+            "name": "Surya", // Pass the user name who is trying to login
+            "mobile_number": "888888888", // Pass the user mobile number who is trying to login
+            "email": "surya@sharpsell.ai",// Pass the user email id whoc is trying to login, if you were not maintaing then pass it as empty string
              "fcm_token": firebaseToken] // Pass the firebase token 
 
         Sharpsell.services.initialize(smartsellParameters: initSharpsellData) {
@@ -60,7 +68,6 @@ A sample code on how to initialize the SDK is given below.
 Sharpsell team will provide the following items.
 1. company_code
 2. user_group_id
-3. base_url
 :::
 
 ## Step 3: Handling Notification
@@ -69,14 +76,6 @@ Sharpsell team will provide the following items.
 Firebase setup has to be done to enable push notification on Sharpsell SDK.
 To set up iOS firebase setup follow this - https://firebase.google.com/docs/ios/setup
 :::
-
-In `didRegisterForRemoteNotificationsWithDeviceToken` delegate method call the below function to setup the device token for push notifications.
-
-```swift title="AppDelegate.swift"
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        Sharpsell.services.setPushTokenWhenDidRegisterForRemoteNotifications(with: deviceToken)
-    }
-```
 
 Call the `isSharpsellNotification` function in the `didReceiveRemoteNotification` delegate method to verify the received notification is a Sharpsell notification or not. If it is a Sharpsell notification then the notification will be shown as per the Sharpsell configurations. 
 
@@ -87,7 +86,6 @@ Call the `isSharpsellNotification` function in the `didReceiveRemoteNotification
       
         Sharpsell.services.isSharpsellNotification(notificationPayLoad: userInfo) { isSharpsellNotification in
             if isSharpsellNotification{
-                 Sharpsell.services.setNotificationDataWhenDidReceiveRemoteNotification(application, userInfo)
                 Sharpsell.services.showNotification(notificationPayLoad: userInfo) {
                     NSLog("Sharpsell Parent App - Notification showed successfully 🥳")
                 } onFailure: { message, errorType in
@@ -104,68 +102,27 @@ Call the `isSharpsellNotification` function in the `didReceiveRemoteNotification
 Call the below method in the `didReceive` notification delegate method which will be called whenever the user clicks on the received notification. This function is responsible for opening and redirecting to the Sharpsell screen based on the notification input.
 
 ```swift title="AppDelegate.swift"
- 
-   // This function will be called on click on the sharpsell notifcation
-   func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse) async {
-        let notificationInfo = response.notification.request.content.userInfo
-        NSLog("Sharpsell Parent App: did recived notfications on userNotificationCenter - didReceive")
-        NSLog("Sharpsell Parent App: - \(notificationInfo)")
-        if let app_extra = notificationInfo["app_extra"] as? [AnyHashable : Any],let moe_deeplink = app_extra["moe_deeplink"] as? String{
-            Sharpsell.services.setNotificationDataWhenDidReceive(center, response)
-            let dvcArgs = ["route" : moe_deeplink]
-            var sharpsellOpenDataInString = Sharpsell.services.convertJsonToString(dict: dvcArgs) ?? ""
-            
-            Sharpsell.services.open(arguments: sharpsellOpenDataInString) { flutterViewController in
-                flutterViewController.navigationController?.navigationBar.isHidden = true
-                flutterViewController.modalPresentationStyle = .fullScreen
-
-                Sharpsell.services.getTopMostViewController { topMostViewController in
-                    if topMostViewController is UINavigationController{
-                        let topVC = topMostViewController as! UINavigationController
-                        topVC.pushViewController(flutterViewController, animated: true)
-                    } else {
-                        topMostViewController.present(flutterViewController, animated: true, completion: nil)
-                    }
-                } onFailure: {
-                    NSLog("Sharpsell Parent App - Failed to get top most view controller")
+     Sharpsell.services.handleNotificationRedirection(notificationData: notificationInfo) { notificationData in
+          
+        Sharpsell.services.open(arguments: notificationData) { flutterViewController in
+            flutterViewController.navigationController?.navigationBar.isHidden = true
+            flutterViewController.modalPresentationStyle = .fullScreen
+            Sharpsell.services.getTopMostViewController { topMostViewController in
+                 if topMostViewController is UINavigationController{
+                    let topVC = topMostViewController as! UINavigationController
+                    topVC.pushViewController(flutterViewController, animated: true)
+                } else {
+                     topMostViewController.present(flutterViewController, animated: true, completion: nil)
                 }
-
-            } onFailure: { message, errorType in
-                NSLog("Sharpsell Parent App - Failed to open sharpsell from notification ❌")
-            }
-        } else {
-            Sharpsell.services.handleNotificationRedirection(notificationData: notificationInfo) { notificationData in
-                NSLog("Sharpsell Parent App- Notification opend Successfull 🥳")
-                NSLog("Sharpsell Parent App : notificationData - \(notificationData)")
-
-                Sharpsell.services.setNotificationDataWhenDidReceive(center, response)
-
-                Sharpsell.services.open(arguments: notificationData) { flutterViewController in
-                    flutterViewController.navigationController?.navigationBar.isHidden = true
-                    flutterViewController.modalPresentationStyle = .fullScreen
-
-                    Sharpsell.services.getTopMostViewController { topMostViewController in
-                        if topMostViewController is UINavigationController{
-                            let topVC = topMostViewController as! UINavigationController
-                            topVC.pushViewController(flutterViewController, animated: true)
-                        } else {
-                            topMostViewController.present(flutterViewController, animated: true, completion: nil)
-                        }
-                    } onFailure: {
-                        NSLog("Sharpsell Parent App - Failed to get top most view controller")
-                    }
-
-                } onFailure: { message, errorType in
-                    NSLog("Sharpsell Parent App - Failed to open sharpsell from notification ❌")
-                }
-
-            } onFailure: { message, errorType in
-                NSLog("Sharpsell Parent App - Failed to handle notfication ❌")
-            }
+            } onFailure: {
+                 NSLog("Sharpsell - Failed to get top most view controller")
+            }    
+         } onFailure: { message, errorType in
+             NSLog("Sharpsell - Failed to open sharpsell from notification ❌")
+        }  
+        } onFailure: { message, errorType in
+            NSLog("Sharpsell - Failed to handle notfication ❌")
         }
-    }
-
 ```
 
 :::note
@@ -204,10 +161,8 @@ let presentationArgs = ["route" : "productPresentationInput",
                         "presentation_name" : presentationInputName,
                         "input_one" : presentationInputOne,
                         "input_two" : presentationInputTwo]
-    
-     var sharpsellOpenDataInString: String? =  Sharpsell.services.convertJsonToString(dict: presentationArgs)
 
-     Sharpsell.services.open(arguments: sharpsellOpenDataInString  ?? ""){ (flutterViewController) in
+    Sharpsell.services.open(arguments: presentationArgs){ (flutterViewController) in
          self.navigationController?.pushViewController(flutterViewController, animated: true)
     } onFailure: { (errorMessage, smartSellError) in
          switch smartSellError {
@@ -231,9 +186,7 @@ To open the Sharpsell launchpad screen from your app use the below function
 ```swift
      let launchpadArgs = ["route" : "launchpad"]
 
-      var sharpsellOpenDataInString: String? =  Sharpsell.services.convertJsonToString(dict: launchpadArgs)
-
-       Sharpsell.services.open(arguments: sharpsellOpenDataInString  ?? ""){ (flutterViewController) in
+       Sharpsell.services.open(arguments: launchpadArgs){ (flutterViewController) in
             self.navigationController?.pushViewController(flutterViewController, animated: true)
         } onFailure: { (errorMessage, smartSellError) in
             switch smartSellError {
@@ -253,9 +206,7 @@ To open the Sharpsell marketing collateral directory screen from your app use th
 ```swift
      let mcDirArgs = ["route" : "mcDirectory"]
 
-     var sharpsellOpenDataInString: String? =  Sharpsell.services.convertJsonToString(dict: mcDirArgs)
-
-       Sharpsell.services.open(arguments: sharpsellOpenDataInString  ?? ""){ (flutterViewController) in
+       Sharpsell.services.open(arguments: mcDirArgs){ (flutterViewController) in
             self.navigationController?.pushViewController(flutterViewController, animated: true)
         } onFailure: { (errorMessage, smartSellError) in
             switch smartSellError {
@@ -275,18 +226,16 @@ To open the custom mappped directory screen from your app use the below function
 
 :::info
 
-Contact sharpsell team before integrating the custom directory as it has to be mapped first by them. They will provide you the value to pass in ``app_url``.
+Contact sharpsell team before integrating the custom directory as it has to be mapped first by them. They will provide you the value to pass in ``entry_point``.
 
 :::
 
 ```swift
 
       let mcDirArgs = ["route" : "mcDirectory"]
-      mcDirArgs["app_url"] = "1" // value added here is for sample
+      mcDirArgs["entry_point"] = "1" // value added here is for sample
 
-     var sharpsellOpenDataInString: String? =  Sharpsell.services.convertJsonToString(dict: mcDirArgs)
-
-     Sharpsell.services.open(arguments: sharpsellOpenDataInString  ?? ""){ (flutterViewController) in
+      Sharpsell.services.open(arguments: mcDirArgs){ (flutterViewController) in
         self.navigationController?.pushViewController(flutterViewController, animated: true)
       } onFailure: { (errorMessage, smartSellError) in
             switch smartSellError {
@@ -306,9 +255,7 @@ To open the Sharpsell poster of the day screen from your app use the below funct
 ```swift
      let potdArgs = ["route" : "potd"]
 
-   var sharpsellOpenDataInString: String? =  Sharpsell.services.convertJsonToString(dict: potdArgs)
-
-    Sharpsell.services.open(arguments: sharpsellOpenDataInString  ?? ""){ (flutterViewController) in
+       Sharpsell.services.open(arguments: potdArgs){ (flutterViewController) in
             self.navigationController?.pushViewController(flutterViewController, animated: true)
         } onFailure: { (errorMessage, smartSellError) in
             switch smartSellError {
@@ -328,9 +275,7 @@ To open the Sharpsell digital visiting card screen from your app use the below f
 ```swift
      let dvcArgs = ["route" : "dvc"]
 
-     var sharpsellOpenDataInString: String? =  Sharpsell.services.convertJsonToString(dict: dvcArgs)
-
-    Sharpsell.services.open(arguments: sharpsellOpenDataInString  ?? ""){ (flutterViewController) in
+       Sharpsell.services.open(arguments: dvcArgs){ (flutterViewController) in
             self.navigationController?.pushViewController(flutterViewController, animated: true)
         } onFailure: { (errorMessage, smartSellError) in
             switch smartSellError {
@@ -350,9 +295,7 @@ To open the Sharpsell timer challenge screen from your app use the below functio
 ```swift
      let tcHomeArgs = ["route" : "tcHome"]
 
-     var sharpsellOpenDataInString: String? =  Sharpsell.services.convertJsonToString(dict: tcHomeArgs)
-
-    Sharpsell.services.open(arguments: sharpsellOpenDataInString  ?? ""){ (flutterViewController) in
+       Sharpsell.services.open(arguments: tcHomeArgs){ (flutterViewController) in
             self.navigationController?.pushViewController(flutterViewController, animated: true)
         } onFailure: { (errorMessage, smartSellError) in
             switch smartSellError {
@@ -371,9 +314,7 @@ To open the Sharpsell product bundle screen from your app use the below function
 ```swift
      let productBundleArgs = ["route" : "productBundle"]
 
-      var sharpsellOpenDataInString: String? =  Sharpsell.services.convertJsonToString(dict: productBundleArgs)
-
-    Sharpsell.services.open(arguments: sharpsellOpenDataInString  ?? ""){ (flutterViewController) in
+       Sharpsell.services.open(arguments: productBundleArgs){ (flutterViewController) in
             self.navigationController?.pushViewController(flutterViewController, animated: true)
         } onFailure: { (errorMessage, smartSellError) in
             switch smartSellError {
@@ -385,6 +326,25 @@ To open the Sharpsell product bundle screen from your app use the below function
                 debugPrint("")
             }
 ```
+### Your Progress Screen
+To open the Sharpsell your progress directory screen from your app use the below function
+
+```swift
+     let mcDirArgs = ["route" : "yourProgress"]
+
+       Sharpsell.services.open(arguments: mcDirArgs){ (flutterViewController) in
+            self.navigationController?.pushViewController(flutterViewController, animated: true)
+        } onFailure: { (errorMessage, smartSellError) in
+            switch smartSellError {
+            case .flutterError:
+                debugPrint("Error Message: \(errorMessage)")
+            case .flutterMethodNotImplemented:
+                debugPrint("")
+            default:
+                debugPrint("")
+            }
+        }
+```
 
 ### Quick Links Screen
 
@@ -393,9 +353,7 @@ To open Sharpsell quick links screen from your app use the below function
 ```swift
      let quickLinksArgs = ["route" : "quickLinks"]
 
-     var sharpsellOpenDataInString: String? =  Sharpsell.services.convertJsonToString(dict: quickLinksArgs)
-
-    Sharpsell.services.open(arguments: sharpsellOpenDataInString  ?? ""){ (flutterViewController) in
+       Sharpsell.services.open(arguments: quickLinksArgs){ (flutterViewController) in
             self.navigationController?.pushViewController(flutterViewController, animated: true)
         } onFailure: { (errorMessage, smartSellError) in
             switch smartSellError {

@@ -92,11 +92,13 @@ public class SharpSellSDK extends ReactContextBaseJavaModule {
     try{
         JSONObject objData = new JSONObject(obj);
         JSONObject data = new JSONObject();
-        data.put("company_code", "company Code"); // Company code given to you by sharpsell team
-        data.put("base_url", ""); //This is non mandatory field. Check with sharpsell team if you need pass this value for your company or not.If yes, sharpsell team will provide this information. 
-        data.put("sharpsell_api_key", "sharpsell api key"); // API Key given by the sharpsell team
-        data.put("user_unique_id", "");  // User unique id or user external id which is the id of the user which you are trying to login
-        //Pass the below key to enable push notification to be recived on your device
+        data.put("company_code", "company_code");
+        data.put("user_unique_id", "unique ser identifier);
+        data.put("user_group_id", 1);
+        data.put("country_code", ""); 
+        data.put("name", "Test User");
+        data.put("mobile_number", '8888888888');
+        data.put("email", "test@test.com"));
         data.put("fcm_token", fcmToken);
 
         return data.toString();
@@ -111,8 +113,7 @@ public class SharpSellSDK extends ReactContextBaseJavaModule {
 :::note
 Sharpsell team will provide the following items.
 1. company_code
-2. sharpsell_api_key
-3. base_url
+2. user_group_id
 :::
 
 In the above file, you have to add the below entry points.
@@ -173,10 +174,7 @@ To open the Sharpsell customer presentation screen from your app use the below f
 
 ```
 JSONObject data = new JSONObject();
-data.put("route", "productPresentationInput");
-data.put("presentation_name", "presentation name");
-data.put("input_one", "input value for field one");
-data.put("input_two", "input value for field two");
+data.put("route", "product_presentation_input");
 Sharpsell.INSTANCE.open(getReactApplicationContext(), dataPS.toString());
 ```
 
@@ -202,7 +200,7 @@ To open the Sharpsell marketing collateral directory screen from your app use th
 
 ```
 JSONObject data = new JSONObject();
-data.put("route", "mcDirectory");
+data.put("route", "mc_directory");
 
 Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```
@@ -219,8 +217,9 @@ Contact sharpsell team before integrating the custom directory as it has to be m
 
 ```
 JSONObject data = new JSONObject();
-data.put("route", "mcDirectory");
-data.put("app_url", ""); // value added here is for sample and sharpsell team can you help you getting the custom url
+data.put("route", "mc_directory");
+
+data.put("entry_point", 1); //sample
 
 Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```
@@ -250,7 +249,7 @@ To open the Sharpsell timer challenge screen from your app use the below functio
 
 ```
 JSONObject data = new JSONObject();
-data.put("route", "tcHome");
+data.put("route", "tc_home");
 Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```
 
@@ -260,10 +259,18 @@ To open the Sharpsell product bundle screen from your app use the below function
 
 ```
 JSONObject data = new JSONObject();
-data.put("route", "productBundle");
+data.put("route", "product_bundle");
 Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```
 
+### Your Progress Screen
+To open the Sharpsell your progress screen from your app use the below function
+
+```
+JSONObject data = new JSONObject();
+data.put("route", "yourProgress");
+Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
+```
 
 ### Quick Links Screen
 
@@ -271,7 +278,7 @@ To open Sharpsell quick links screen from your app use the below function
 
 ```
 JSONObject data = new JSONObject();
-data.put("route", "quickLinks");
+data.put("route", "quick_links");
 Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```
 
