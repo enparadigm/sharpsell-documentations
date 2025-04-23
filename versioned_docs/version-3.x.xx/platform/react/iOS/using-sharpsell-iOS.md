@@ -38,6 +38,7 @@ A sample code on how to initialize the SDK is given below.
         let initSharpsellData: [String:Any] = [
             "company_code": "sample_sdk", // Company code given to you by sharpsell team
             "sharpsell_api_key": "", //  API Key given by the sharpsell team
+              "base_url": "", //This is non mandatory field. Check with sharpsell team if you need pass this value for your company or not.If yes, sharpsell team will provide this information. 
             "user_unique_id": "unique_id_of_the_user", // User unique id or user external id which is the id of the user which you are trying to login
              "fcm_token": firebaseToken] // Pass the firebase token 
 
@@ -59,6 +60,7 @@ A sample code on how to initialize the SDK is given below.
 Sharpsell team will provide the following items.
 1. company_code
 2. user_group_id
+3. base_url
 :::
 
 ## Step 3: Handling Notification

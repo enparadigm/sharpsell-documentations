@@ -93,6 +93,7 @@ public class SharpSellSDK extends ReactContextBaseJavaModule {
         JSONObject objData = new JSONObject(obj);
         JSONObject data = new JSONObject();
         data.put("company_code", "company Code"); // Company code given to you by sharpsell team
+        data.put("base_url", ""); //This is non mandatory field. Check with sharpsell team if you need pass this value for your company or not.If yes, sharpsell team will provide this information. 
         data.put("sharpsell_api_key", "sharpsell api key"); // API Key given by the sharpsell team
         data.put("user_unique_id", "");  // User unique id or user external id which is the id of the user which you are trying to login
         //Pass the below key to enable push notification to be recived on your device
@@ -111,6 +112,7 @@ public class SharpSellSDK extends ReactContextBaseJavaModule {
 Sharpsell team will provide the following items.
 1. company_code
 2. sharpsell_api_key
+3. base_url
 :::
 
 In the above file, you have to add the below entry points.

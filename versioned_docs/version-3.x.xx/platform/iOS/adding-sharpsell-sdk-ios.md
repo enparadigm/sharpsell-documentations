@@ -17,7 +17,7 @@ import ReactPlayer from 'react-player';
 
 ## Pre-Requisites
 
-1. Xcode 14.1 or later.
+1. Xcode 15 or later.
 
 2. The minimum iOS version supported by Sharpsell is iOS `13.0`
 
@@ -58,25 +58,36 @@ We want permission to access your camera to set your profile picture, set images
 
 <details>
 <summary><b>LSApplicationQueriesSchemes</b></summary>
+
 Below are the two queery scheme expected to be added in the LSApplicationQueriesSchemes
 
-<b>whatsapp</b>
-<b>sharpsell</b>
+1. <b>whatsapp</b>
+2. <b>sharpsell</b>
 
 Add <b>whatsapp</b> to the array of query scheme
-
 We need this Application Queries Schemes to open WhatsApp to send messages to customers with the click of the WhatsApp share button.
 
 Add <b>sharpsell</b> to the array of query scheme
-
 We need this Application Queries Schemes for deeplink to work in the integrated app.
-
 </details>
 
 :::warning Adding user permission in info.plist
 We need to add all the above user permission to your `info.plist` file. If not you may get rejections while updloading the app to the AppStore connect.
 
 Please go through the sample app info.plist file, if you want some examples of how to add this permission on iOS
+:::
+
+## Adding Associated domains
+
+We need add the domains to make the deeplink work in the integrated app.
+
+To add the associated domain follow the below steps,
+1. Natvigate to your target and click on Signing & Capabilities 
+2. Click on (+ Capability) button and once it is clicked it will add the Associated domain.
+3. In Associated domain, click on the (+) button. And the given applink domain name in the text box and click on enter.
+
+:::note
+Sharpsell team will provide you the domain name which needs to be added in the associated domain
 :::
 
 ## Adding Associated domains
@@ -114,7 +125,7 @@ There are 2 steps involved in adding the Sharpsell SDK to your project.
    ![Adding Sharpsell SDK using the swift package manager ](./assets/spm.png)
 
 
-2. Choose Branch in the Dependency Rule then click choose "UpTo Next Major" in the versions and add **2.7.0** as a major version,
+2. Choose Branch in the Dependency Rule then click choose "Exact Version" in the versions and add the version number which is given by sharpsell team ,
    then click Add Package button. This will add the Sharpsell framework as a package dependency for
    your app
 
@@ -127,7 +138,6 @@ There are 2 steps involved in adding the Sharpsell SDK to your project.
    - App.xcframework
    - Flutter.xcframework
    - FBLPromises.xcframework
-   - FMDB.xcframework
 
 
 3. To run in iOS Simulators, we need to use debug version. So, if you are testing the app in the simulator then use XCFramrworks which is available in Debug Folder.
