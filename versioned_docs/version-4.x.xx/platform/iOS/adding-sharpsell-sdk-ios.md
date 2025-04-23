@@ -17,7 +17,7 @@ import ReactPlayer from 'react-player';
 
 ## Pre-Requisites
 
-1. Xcode 13.4.1 or later.
+1. Xcode 16 or later.
 
 2. The minimum iOS version supported by Sharpsell is iOS `12.0`
 
@@ -103,7 +103,7 @@ There are 2 steps involved in adding the Sharpsell SDK to your project.
    - App.xcframework
    - Flutter.xcframework
    - FBLPromises.xcframework
-   - daily_flutter.xcframework
+   - FMDB.xcframework
 
 
 3. To run in iOS Simulators, we need to use debug version. So, if you are testing the app in the simulator then use XCFramrworks which is available in Debug Folder.

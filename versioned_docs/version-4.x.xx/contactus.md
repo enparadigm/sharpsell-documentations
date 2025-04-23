@@ -12,7 +12,6 @@ sumit.arya@sharpsell.ai
 ```
 
 ```swift title="cc:-"
-saravana.kumar@sharpsell.ai
 soham.pandya@sharpsell.ai
 surya.saravanakumar@sharpsell.ai
 ```
