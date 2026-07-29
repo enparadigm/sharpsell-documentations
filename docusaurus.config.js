@@ -124,13 +124,6 @@ const config = {
             label: "DOCS",
           },
           {
-            type: "docSidebar",
-            sidebarId: "tutorialSidebar",
-            docsPluginId: "sdk",
-            position: "left",
-            label: "SDK Documentation",
-          },
-          {
             type: "docsVersionDropdown",
             docsPluginId: "sdk",
             position: "right",
