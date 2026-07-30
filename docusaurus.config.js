@@ -35,6 +35,29 @@ const config = {
     locales: ["en"],
   },
 
+  markdown: {
+    preprocessor: ({ filePath, fileContent }) => {
+      if (
+        filePath.includes("sdk_docs") ||
+        filePath.includes("sdk_versioned_docs")
+      ) {
+        return fileContent
+          .replaceAll("{base-domain}", "\\{base-domain\\}")
+          .replaceAll(
+            "<ArrowRight className='arrow' />",
+            "{<ArrowRight className='arrow' />}",
+          )
+          .replace(
+            /<VersionedLink([^>]*)>\s*([\s\S]*?)\s*<\/VersionedLink>/g,
+            (_, attributes, children) =>
+              `<VersionedLink${attributes}>\n\n${children.trim()}\n\n</VersionedLink>`,
+          );
+      }
+
+      return fileContent;
+    },
+  },
+
   presets: [
     [
       "classic",
@@ -59,6 +82,20 @@ const config = {
           customCss: "./src/css/custom.css",
         },
       }),
+    ],
+  ],
+
+  plugins: [
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "sdk",
+        path: "sdk_docs",
+        routeBasePath: "sdk",
+        sidebarPath: "./sidebarsSdk.js",
+        breadcrumbs: true,
+        includeCurrentVersion: false,
+      },
     ],
   ],
 
@@ -88,6 +125,7 @@ const config = {
           },
           {
             type: "docsVersionDropdown",
+            docsPluginId: "sdk",
             position: "right",
           },
         ],

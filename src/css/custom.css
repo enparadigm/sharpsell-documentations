@@ -28,3 +28,32 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+/* SDK landing-page classes retained from the original SDK documentation. */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.gallery > .card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.gallery > .card h4 {
+  font-size: 1.1rem;
+}
+
+.gallery > .card a {
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  margin-left: auto;
+}
+
+.gallery > .card:hover .arrow {
+  transform: translateX(5px);
+}
