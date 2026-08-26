@@ -7,17 +7,6 @@
     },
     {
       "type": "category",
-      "label": "SCORM in Sharpsell",
-      "items": [
-        {
-          "type": "link",
-          "label": "Guidelines",
-          "href": "/scorm/guidelines"
-        }
-      ]
-    },
-    {
-      "type": "category",
       "label": "SDK Documentation",
       "collapsed": false,
       "items": [
