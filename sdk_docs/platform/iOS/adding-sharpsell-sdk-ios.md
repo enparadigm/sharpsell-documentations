@@ -17,9 +17,9 @@ import ReactPlayer from 'react-player';
 
 ## Pre-Requisites
 
-1. Xcode 13.4.1 or later.
+1. Xcode 15 or later.
 
-2. The minimum iOS version supported by Sharpsell is iOS `12.0`
+2. The minimum iOS version supported by Sharpsell is iOS `16.0`
 
 3. Firebase should be enabled and the `GoogleService-Info.plist` file should be properly setup.
 
@@ -51,22 +51,41 @@ We need to access the user's microphone to record audio on a video for roleplay 
 
 <details>
 <summary><b>Privacy - Contacts Usage Description</b></summary>
-We want permission to access your camera to set your profile picture, set images in presentations, and record videos for Roleplay challenges. 
+We want to access your contacts to add them in the auto-filled contact box. 
 </details>
 
 <details>
 <summary><b>LSApplicationQueriesSchemes</b></summary>
 
-Add <b>whatsapp</b> to the array of query scheme
+Below are the two queery scheme expected to be added in the LSApplicationQueriesSchemes
 
+1. <b>whatsapp</b>
+2. <b>sharpsell</b>
+
+Add <b>whatsapp</b> to the array of query scheme
 We need this Application Queries Schemes to open WhatsApp to send messages to customers with the click of the WhatsApp share button.
 
+Add <b>sharpsell</b> to the array of query scheme
+We need this Application Queries Schemes for deeplink to work in the integrated app.
 </details>
 
 :::warning Adding user permission in info.plist
 We need to add all the above user permission to your `info.plist` file. If not you may get rejections while updloading the app to the AppStore connect.
 
 Please go through the sample app info.plist file, if you want some examples of how to add this permission on iOS
+:::
+
+## Adding Associated domains
+
+We need add the domains to make the deeplink work in the integrated app.
+
+To add the associated domain follow the below steps,
+1. Natvigate to your target and click on Signing & Capabilities 
+2. Click on (+ Capability) button and once it is clicked it will add the Associated domain.
+3. In Associated domain, click on the (+) button. And the given applink domain name in the text box and click on enter.
+
+:::note
+Sharpsell team will provide you the domain name which needs to be added in the associated domain
 :::
 
 ## Installation
@@ -90,7 +109,7 @@ There are 2 steps involved in adding the Sharpsell SDK to your project.
    ![Adding Sharpsell SDK using the swift package manager ](./assets/spm.png)
 
 
-2. Choose Branch in the Dependency Rule then click choose "UpTo Next Major" in the versions and add **2.7.0** as a major version,
+2. Choose Branch in the Dependency Rule then click choose "Exact Version" in the versions and add the version number which is given by sharpsell team ,
    then click Add Package button. This will add the Sharpsell framework as a package dependency for
    your app
 
@@ -98,22 +117,22 @@ There are 2 steps involved in adding the Sharpsell SDK to your project.
 
 1. Download the XCFramework from the link which is given by the Sharpsell team and unzip it.
 
-2. You will find debug and release folders. Inside the folders, you will find the below XCframeworks
+2. You will find debug and release folders. Embed these local XCFrameworks in **Frameworks, Libraries, and Embedded Content** as **Embed & Sign**:
 
    - App.xcframework
    - Flutter.xcframework
    - FBLPromises.xcframework
-   - FMDB.xcframework
+   - daily_flutter.xcframework
+   - WebRTC.xcframework
 
+   Sharpsell team will provide `daily_flutter` and `WebRTC` with the XCFramework package (or confirm they are already linked from your workspace). Do not add `FMDB.xcframework`.
 
-3. To run in iOS Simulators, we need to use debug version. So, if you are testing the app in the simulator then use XCFramrworks which is available in Debug Folder.
+3. To run in iOS Simulators, we need to use debug version. So, if you are testing the app in the simulator then use XCFrameworks which is available in the Debug folder.
 
 4. Use XCFrameworks which is in the Release folder when sharing a build or releasing the app to the app
    store. Debug frameworks will be slower compared with release frameworks.
 
-5. Drag and drop all four XCFramework in **Framework, Libraries and Embedded content** section in
-   project settings for your app target. All the frameworks will be added as **Embed & Sign** 
-   frameworks by default.
+5. Drag and drop the local XCFrameworks in **Frameworks, Libraries and Embedded Content** for your app target. All of these frameworks should be **Embed & Sign**.
 
 Make sure all other frameworks are in **Embed & Sign**.
 

@@ -32,14 +32,16 @@ Start integrating our SDK on your platform easily by following the documentation
 ```gradle
 android.useAndroidX=true
 ```
-2. The minimum android SDK version should be at least 21.
+2. The minimum android SDK version should be at least 28.
 ```gradle
-minSdkVersion 21
+minSdkVersion 28
+targetSdkVersion 36
+compileSdk 36
 ```
 :::info
 To know more about android version and policy details [click here](/android_version_details)
 :::
-3. Firebase should be enabled and the `google-seriveces.json` file should be properly set up.
+3. Firebase should be enabled and the `google-services.json` file should be properly set up.
 
 :::tip Firebase Setup
 Please refer to the [Firebase Setup](/#2-firebase-setup) section to setup firebase for the required platform.
@@ -50,9 +52,9 @@ Please refer to the [Firebase Setup](/#2-firebase-setup) section to setup fireba
 <TabItem value="iOS">
 ```
 
-1. Xcode 13.4.1 or later.
+1. Xcode 15 or later.
 
-2. The minimum iOS version supported by Sharpsell is iOS `12.0`
+2. The minimum iOS version supported by Sharpsell is iOS `16.0`
 
 3. Firebase should be enabled and the `GoogleService-Info.plist` file should be properly setup.
 
@@ -172,19 +174,19 @@ https://github.com/enparadigm/SharpsellCore.git
 
 | Fields | description |
 | --- | --- |
-| company_code | unique code for your company |
-| user_unique_id | user’s unique identifier  |
-| user_group_id | group id user is mapped to |
-| user_meta | data to update or create user meta details |
-| name | username to display |
-| mobile_number | user mobile number |
-| email | user email address |
-| fcm_token | firebase fcm token to enable push notification |
+| company_code | unique code for your company (mandatory) |
+| sharpsell_api_key | API key given by the Sharpsell team (mandatory) |
+| user_unique_id | user’s unique identifier (mandatory) |
+| base_url | optional. Pass only if the Sharpsell team asks you to |
+| fcm_token | firebase FCM token to enable push notification |
+| user_details | optional JSON to create or update user profile fields |
+| client_data | optional company-specific JSON. Pass only if the Sharpsell team asks you to |
 
 :::note
 Sharpsell team will provide the following items:
 1. company_code
-2. user_group_id
+2. sharpsell_api_key
+3. base_url (if required for your company)
 :::
 
 </details>

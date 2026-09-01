@@ -19,7 +19,7 @@ import ReactPlayer from 'react-player';
 
 1. Xcode 15 or later.
 
-2. The minimum iOS version supported by Sharpsell is iOS `13.0`
+2. The minimum iOS version supported by Sharpsell is iOS `16.0`
 
 3. Firebase should be enabled and the `GoogleService-Info.plist` file should be properly setup.
 
@@ -51,7 +51,7 @@ We need to access the user's microphone to record audio on a video for roleplay 
 
 <details>
 <summary><b>Privacy - Contacts Usage Description</b></summary>
-We want permission to access your camera to set your profile picture, set images in presentations, and record videos for Roleplay challenges. 
+We want to access your contacts to add them in the auto-filled contact box. 
 </details>
 
 <details>
@@ -117,21 +117,22 @@ There are 2 steps involved in adding the Sharpsell SDK to your project.
 
 1. Download the XCFramework from the link which is given by the Sharpsell team and unzip it.
 
-2. You will find debug and release folders. Inside the folders, you will find the below XCframeworks
+2. You will find debug and release folders. Embed these local XCFrameworks in **Frameworks, Libraries, and Embedded Content** as **Embed & Sign**:
 
    - App.xcframework
    - Flutter.xcframework
    - FBLPromises.xcframework
+   - daily_flutter.xcframework
+   - WebRTC.xcframework
 
+   Sharpsell team will provide `daily_flutter` and `WebRTC` with the XCFramework package (or confirm they are already linked from your workspace). Do not add `FMDB.xcframework`.
 
-3. To run in iOS Simulators, we need to use debug version. So, if you are testing the app in the simulator then use XCFramrworks which is available in Debug Folder.
+3. To run in iOS Simulators, we need to use debug version. So, if you are testing the app in the simulator then use XCFrameworks which is available in the Debug folder.
 
 4. Use XCFrameworks which is in the Release folder when sharing a build or releasing the app to the app
    store. Debug frameworks will be slower compared with release frameworks.
 
-5. Drag and drop all four XCFramework in **Framework, Libraries and Embedded content** section in
-   project settings for your app target. All the frameworks will be added as **Embed & Sign** 
-   frameworks by default.
+5. Drag and drop the local XCFrameworks in **Frameworks, Libraries and Embedded Content** for your app target. All of these frameworks should be **Embed & Sign**.
 
 Make sure all other frameworks are in **Embed & Sign**.
 

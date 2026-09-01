@@ -10,66 +10,46 @@ import ReactPlayer from 'react-player';
 <ReactPlayer playing controls url='/videos/React_android_usage.mp4'/>
 <br></br>
 
-**[Open React sample app](https://github.com/enparadigm/sharpsell_android_sample)**
+React Native Android hosts the Sharpsell **Android SDK**. The Java API is the same as native Android: `com.enparadigm.sharpsell.sdk.Sharpsell`.
 
 ## Step 1: Create the SharpSell Engine
 
-Create the Sharpsell Engine with the `Application Context` in the `Application Class`, and also have to add the `getPackages()` method
-as shown below to add SharpSellSDKPackage to your application React native packages, below is the code pattern for reference.
+Create the Sharpsell Engine with the `Application` context in `MainApplication`, and add `SharpSellSDKPackage` to the React Native package list.
 
-```
+```java
 import com.enparadigm.sharpsell.sdk.Sharpsell;
 
 public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      @SuppressWarnings("UnnecessaryLocalVariable")
       List<ReactPackage> packages = new PackageList(this).getPackages();
-      // Packages that cannot be autolinked yet can be added manually here, for example:
-      // packages.add(new MyReactNativePackage());
-        packages.add(new SharpSellSDKPackage());
+      packages.add(new SharpSellSDKPackage());
       return packages;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        ApplicationLifecycleDispatcher.onApplicationCreate(this);
         Sharpsell.INSTANCE.createSharpsellEngine(this);
     }
 }
 ```
 
-
 ## Step 2: Initializing the SDK
 
-The SDK has to be initialized before calling any other methods of the SDK. On calling the `Sharpsell.initialize` method, a success or failure status will be returned via a callback.
-A sample code on how to initialize the SDK is given below.
+`initialize` requires a `Context`, a JSON **string**, a success listener, and an error listener. Do not call `Sharpsell.INSTANCE.initialize()` with no arguments.
 
-```
-Sharpsell.INSTANCE.initialize()
-```
+Create `SharpSellSDK.java` as a native module:
 
-
-## Step 3: Adding Sharpsell SDK Entry points
-
-:::note
-Make sure to call ` Sharpsell.INSTANCE.initialize` function before calling any other below-mentioned entry points.
-:::
-
-To make Sharpsell SDK entry points, the user should create another .java file where we call the package `SharpSellSDKPackage` which we made earlier.
-
-```
+```java
 package com.myreactnative;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.Promise;
 
-import android.annotation.SuppressLint;
-import android.util.Log;
-import android.widget.Toast;
 import com.enparadigm.sharpsell.sdk.ErrorListener;
 import com.enparadigm.sharpsell.sdk.Sharpsell;
 import com.enparadigm.sharpsell.sdk.SuccessListener;
@@ -77,60 +57,63 @@ import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
 
 public class SharpSellSDK extends ReactContextBaseJavaModule {
-    
-    //constructor
+
     public SharpSellSDK(ReactApplicationContext reactContext) {
         super(reactContext);
     }
-    //Mandatory function getName that specifies the module name
+
     @Override
     public String getName() {
         return "SharpSellSDK";
-    };
+    }
 
-    public String getData(String obj){
-    try{
-        JSONObject objData = new JSONObject(obj);
-        JSONObject data = new JSONObject();
-        data.put("company_code", "company_code");
-        data.put("user_unique_id", "unique ser identifier);
-        data.put("user_group_id", 1);
-        data.put("country_code", ""); 
-        data.put("name", "Test User");
-        data.put("mobile_number", '8888888888');
-        data.put("email", "test@test.com"));
-        data.put("fcm_token", fcmToken);
-
-        return data.toString();
-    } catch(Exception e){
-        e.printStackTrace();
-    };
-    return "";
-    };
+    private String buildInitPayload(String obj, String fcmToken) {
+        try {
+            JSONObject objData = new JSONObject(obj);
+            JSONObject data = new JSONObject();
+            data.put("company_code", objData.optString("company_code"));
+            data.put("base_url", objData.optString("base_url"));
+            data.put("sharpsell_api_key", objData.optString("sharpsell_api_key"));
+            data.put("user_unique_id", objData.optString("user_unique_id"));
+            data.put("fcm_token", fcmToken);
+            if (objData.has("user_details")) {
+                data.put("user_details", objData.get("user_details"));
+            }
+            if (objData.has("client_data")) {
+                data.put("client_data", objData.get("client_data"));
+            }
+            return data.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
 }
 ```
 
 :::note
 Sharpsell team will provide the following items.
 1. company_code
-2. user_group_id
+2. sharpsell_api_key
+3. base_url (if required for your company)
 :::
 
-In the above file, you have to add the below entry points.
+`company_code`, `sharpsell_api_key`, and `user_unique_id` are mandatory. `user_details` and `client_data` are optional. Confirm field names with the Sharpsell team before sending `user_details`.
 
+## Step 3: Adding Sharpsell SDK Entry points
+
+:::note
+Call `Sharpsell.INSTANCE.initialize` successfully before opening any screen.
+:::
 
 ### Home Screen
 
-To open Sharpsell home screen from your app, user have to create a reactmethod in `SharpSellSDK` class like below from.
-
-```
-//Custom function that we are going to export to JS
-// Home Screen
+```java
 @ReactMethod
-public void getHomeScreen(String data) {
-    try{
-        Sharpsell.INSTANCE.enableLogsInProductionSdk(getReactApplicationContext(),true);
-        String objData = getData(data);
+public void getHomeScreen(String data, String fcmToken, Promise promise) {
+    try {
+        Sharpsell.INSTANCE.enableLogsInProductionSdk(getReactApplicationContext(), true);
+        String objData = buildInitPayload(data, fcmToken);
         Sharpsell.INSTANCE.initialize(
             getReactApplicationContext(),
             objData,
@@ -138,163 +121,159 @@ public void getHomeScreen(String data) {
                 @Override
                 public void onSuccess() {
                     Sharpsell.INSTANCE.open(getReactApplicationContext(), null);
+                    promise.resolve(true);
                 }
             },
             new ErrorListener<String>() {
                 @Override
                 public void onError(@Nullable String error) {
+                    promise.reject("INIT_FAILED", error);
                 }
             }
         );
-    } catch (Exception e){
-        e.printStackTrace();
+    } catch (Exception e) {
+        promise.reject("OPEN_HOME_FAILED", e);
     }
-    
+}
+```
+
+Call it from JavaScript:
+
+```js
+import { NativeModules } from 'react-native';
+import messaging from '@react-native-firebase/messaging';
+
+const { SharpSellSDK } = NativeModules;
+
+const openHomePage = async () => {
+  const fcmToken = await messaging().getToken();
+  const data = await getUserInfo();
+  SharpSellSDK.getHomeScreen(JSON.stringify(data), fcmToken);
 };
 ```
 
-And to call the above method from your app.js, here is a below example of our app.js file, `openHomePage` is a simple button
-which will give access to call `getHomeScreen(object)` method.
-
-```
-import messaging from '@react-native-firebase/messaging';
-
-<Button title='Open Home Page' onPress={openHomePage}></Button>
-
-const openHomePage = async () => {
-    const fcmToken = await messaging().getToken();
-    const data = await getUserInfo();
-    SharpSellSDK.getHomeScreen(data)
-  };
-```
+If you are not using React Native Firebase, pass the FCM token from Google Play services the same way the native Android sample does.
 
 ### Presentation Screen
-To open the Sharpsell customer presentation screen from your app use the below function
 
-
-```
+```java
 JSONObject data = new JSONObject();
-data.put("route", "product_presentation_input");
-Sharpsell.INSTANCE.open(getReactApplicationContext(), dataPS.toString());
+data.put("route", "productPresentationInput");
+data.put("presentation_name", "presentation name");
+data.put("input_one", "input value for field one");
+data.put("input_two", "input value for field two");
+Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```
 
 :::note
-We need to pass proper `presentationInputName` and input fields as per the presentation. 
-If the presentation input name is not valid then it will just open the customer presentation screen.
+Pass a valid `presentation_name` and input fields as per the presentation.
+If the presentation name is not valid then it will just open the customer presentation screen.
 :::
 
-
 ### Launchpad Screen
-To open the Sharpsell launchpad screen from your app use the below function
 
-```
+```java
 JSONObject data = new JSONObject();
 data.put("route", "launchpad");
 Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```
 
-
 ### Marketing Collateral Screen
-To open the Sharpsell marketing collateral directory screen from your app use the below function
 
-
-```
+```java
 JSONObject data = new JSONObject();
-data.put("route", "mc_directory");
-
+data.put("route", "mcDirectory");
 Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```
 
 #### Custom Marketing Collateral Directory Screen
-Sharpsell also has the ability to open a specific directory directly without going through the marketing collateral.
-To open the custom mappped directory screen from your app use the below function
 
 :::info
-
-Contact sharpsell team before integrating the custom directory as it has to be mapped first by them. They will provide you the value to pass in ``entry_point``.
-
+Contact the Sharpsell team before integrating the custom directory. They will provide the value to pass in `entry_point`.
 :::
 
-```
+```java
 JSONObject data = new JSONObject();
-data.put("route", "mc_directory");
-
-data.put("entry_point", 1); //sample
-
+data.put("route", "mcDirectory");
+data.put("entry_point", "1"); // directory id provided by the Sharpsell team
 Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```
 
 ### Poster of the day Screen
-To open the Sharpsell poster of the day screen from your app use the below function
 
-```
+```java
 JSONObject data = new JSONObject();
 data.put("route", "potd");
 Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```
 
-
 ### Digital Visiting Card Screen
-To open the Sharpsell digital visiting card screen from your app use the below function
 
-```
+```java
 JSONObject data = new JSONObject();
 data.put("route", "dvc");
 Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```
 
-
 ### Timer Challenge Home Screen
-To open the Sharpsell timer challenge screen from your app use the below function
 
-```
+```java
 JSONObject data = new JSONObject();
-data.put("route", "tc_home");
+data.put("route", "tcHome");
 Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```
-
 
 ### Product Bundle Screen
-To open the Sharpsell product bundle screen from your app use the below function
 
-```
+```java
 JSONObject data = new JSONObject();
-data.put("route", "product_bundle");
-Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
-```
-
-### Your Progress Screen
-To open the Sharpsell your progress screen from your app use the below function
-
-```
-JSONObject data = new JSONObject();
-data.put("route", "yourProgress");
+data.put("route", "productBundle");
 Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```
 
 ### Quick Links Screen
 
-To open Sharpsell quick links screen from your app use the below function
-
-```
+```java
 JSONObject data = new JSONObject();
-data.put("route", "quick_links");
+data.put("route", "quickLinks");
 Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
 ```
 
+### Your Progress Screen
+
+```java
+JSONObject data = new JSONObject();
+data.put("route", "yourProgress");
+Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
+```
+
+### PitchWiz Screen
+
+```java
+JSONObject data = new JSONObject();
+data.put("route", "pitchWiz");
+Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
+```
+
+### Profile Screen
+
+```java
+JSONObject data = new JSONObject();
+data.put("route", "profile");
+Sharpsell.INSTANCE.open(getReactApplicationContext(), data.toString());
+```
 
 ### Logout and clear user data
-Call the sharp sell clear data function while the user is logged out form 
 
-```
+```java
 Sharpsell.INSTANCE.clearData(getReactApplicationContext());
 ```
 
-
 ## Step 4: Handling Notification
+
 Sharpsell notifications can be handled in the `FirebaseMessagingService` class.
 
-```
+```java
 @Override
 public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
     super.onMessageReceived(remoteMessage);
@@ -316,18 +295,16 @@ public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
 }
 ```
 
-
-
 :::caution
-Make sure you are sending fcm token to Sharpsell SDK via `Sharpsell.INSTANCE.initialize` function as one of the arguments. If fcm token is not sent then, you won't be receiving any Sharpsell notifications
+Pass the FCM token to `Sharpsell.INSTANCE.initialize`. If the token is missing, Sharpsell notifications will not arrive.
 :::
 
 ## Enable / Disable logs in the SDK
-This method can be called just before `Sharpsell.INSTANCE.initialize`.
+
+Call this after `createSharpsellEngine` and before or with `initialize`.
 Pass `true` to enable logs.
 Pass `false` to disable logs.
 
-```
+```java
 Sharpsell.INSTANCE.enableLogsInProductionSdk(getReactApplicationContext(), true);
 ```
-

@@ -77,7 +77,7 @@ reportingData.put("identifier_value", "");
 JSONObject fields = new JSONObject();
 fields.put("first_name", "");
 fields.put("last_name", "");
-fields.put("identifier_type", "");
+fields.put("identifier_type", "unique_id");
 fields.put("phone", "");
 fields.put("email", "");
 fields.put("external_unique_id", "");
@@ -101,6 +101,10 @@ data.put("fcm_token", fcmToken);
 
 //Only pass the below key if you want to update user fields
 data.put("user_details", fields);
+
+JSONObject clientData = new JSONObject();
+clientData.put("language", "english");
+data.put("client_data", clientData); // Optional. Pass company-specific client data only if Sharpsell team asks you to.
 
 Sharpsell.INSTANCE.initialize(
         MainActivity.this,
@@ -144,7 +148,7 @@ reportingData.put("identifier_value", "")
 val fields = JSONObject()
 fields.put("first_name", "")
 fields.put("last_name", "")
-fields.put("identifier_type", "")
+fields.put("identifier_type", "unique_id")
 fields.put("phone", "")
 fields.put("email", "")
 fields.put("external_unique_id", "")
@@ -154,24 +158,28 @@ fields.put("reporting_to", reportingData)
 ```
 :::
 
-```java
+```kotlin
 
 val data = JSONObject()
-data.put("company_code", "company Code"); // Company code given to you by sharpsell team
-data.put("base_url", ""); //This is non mandatory field. Check with sharpsell team if you need pass this value for your company or not.If yes, sharpsell team will provide this information. 
-data.put("sharpsell_api_key", "sharpsell api key"); // API Key given by the sharpsell team
-data.put("user_unique_id", "");  // User unique id or user external id which is the id of the user which you are trying to login
+data.put("company_code", "company Code") // Company code given to you by sharpsell team
+data.put("base_url", "") //This is non mandatory field. Check with sharpsell team if you need pass this value for your company or not.If yes, sharpsell team will provide this information. 
+data.put("sharpsell_api_key", "sharpsell api key") // API Key given by the sharpsell team
+data.put("user_unique_id", "")  // User unique id or user external id which is the id of the user which you are trying to login
 
 //Pass the below key to enable push notification to be recived on your device
-data.put("fcm_token", fcmToken);
+data.put("fcm_token", fcmToken)
 
 //Only pass the below key if you want to update user fields
-data.put("user_details", fields);
+data.put("user_details", fields)
+
+val clientData = JSONObject()
+clientData.put("language", "english")
+data.put("client_data", clientData) // Optional. Pass company-specific client data only if Sharpsell team asks you to.
 
 
 Sharpsell.initialize(
             this@MainActivity,
-            data,
+            data.toString(),
             object : SuccessListener {
                 override fun onSuccess() {
                     // Successfully Initialized
@@ -204,6 +212,8 @@ Sharpsell team will provide the following items.
 
 ## Step 3: Handling Notification
 Sharpsell notifications can be handled in the `FirebaseMessagingService` class.
+
+On Android 13 (API 33) and above, request the `POST_NOTIFICATIONS` permission before notifications can be shown.
 
 
 
@@ -340,8 +350,8 @@ Sharpsell.open(this@MainActivity, data.toString())
 ```
 
 :::note
-We need to pass proper `presentationInputName` and input fields as per the presentation. 
-If the presentation input name is not valid then it will just open the customer presentation screen.
+We need to pass a valid `presentation_name` and input fields as per the presentation.
+If the presentation name is not valid then it will just open the customer presentation screen.
 :::
 
 ### Launchpad Screen
@@ -416,7 +426,7 @@ To open the custom mappped directory screen from your app use the below function
 
 :::info
 
-Contact sharpsell team before integrating the custom directory as it has to be mapped first by them. They will provide you the value to pass in ``app_url``.
+Contact sharpsell team before integrating the custom directory as it has to be mapped first by them. They will provide you the value to pass in ``entry_point``.
 
 :::
 
@@ -428,7 +438,7 @@ Contact sharpsell team before integrating the custom directory as it has to be m
 ```java
 JSONObject data = new JSONObject();
 data.put("route", "mcDirectory");
-data.put("app_url", ""); // value added here is for sample and sharpsell team can you help you getting the custom url 
+data.put("entry_point", "1"); // directory id provided by the Sharpsell team
 
 Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
 ```
@@ -441,7 +451,7 @@ Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
 ```kotlin
 val data = JSONObject()
 data.put("route", "mcDirectory")
-data.put("app_url", "") // value added here is for sample
+data.put("entry_point", "1") // directory id provided by the Sharpsell team
 
 Sharpsell.open(this@MainActivity, data.toString())
 ```
@@ -614,6 +624,99 @@ Sharpsell.open(this@MainActivity, data.toString())
 </Tabs>
 ```
 
+### Your Progress Screen
+
+To open the Sharpsell your progress screen from your app use the below function
+
+```mdx-code-block
+<Tabs>
+<TabItem value="Java">
+```
+
+```java
+JSONObject data = new JSONObject();
+data.put("route", "yourProgress");
+Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Kotlin">
+```
+
+```kotlin
+val data = JSONObject()
+data.put("route", "yourProgress")
+Sharpsell.open(this@MainActivity, data.toString())
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+### PitchWiz Screen
+
+To open the Sharpsell PitchWiz screen from your app use the below function
+
+```mdx-code-block
+<Tabs>
+<TabItem value="Java">
+```
+
+```java
+JSONObject data = new JSONObject();
+data.put("route", "pitchWiz");
+Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Kotlin">
+```
+
+```kotlin
+val data = JSONObject()
+data.put("route", "pitchWiz")
+Sharpsell.open(this@MainActivity, data.toString())
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+### Profile Screen
+
+To open the Sharpsell profile screen from your app use the below function
+
+```mdx-code-block
+<Tabs>
+<TabItem value="Java">
+```
+
+```java
+JSONObject data = new JSONObject();
+data.put("route", "profile");
+Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Kotlin">
+```
+
+```kotlin
+val data = JSONObject()
+data.put("route", "profile")
+Sharpsell.open(this@MainActivity, data.toString())
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
 ### Logout and clear user data
 Call the Sharpsell clear data function while the user is logged out form 
 
@@ -665,8 +768,8 @@ Sharpsell.INSTANCE.enableLogsInProductionSdk(MainActivity.this, true);
 <TabItem value="Kotlin">
 ```
 
-```
-Sharpsell.INSTANCE.enableLogsInProductionSdk(MainActivity.this, true)
+```kotlin
+Sharpsell.enableLogsInProductionSdk(this@MainActivity, true)
 ```
 
 ```mdx-code-block

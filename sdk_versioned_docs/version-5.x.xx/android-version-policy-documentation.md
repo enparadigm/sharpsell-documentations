@@ -19,12 +19,12 @@ slug: 'android_version_details'
 
 ### Which is Sharpsell’s target a*ndroid version?*
 
-- [Android 12](https://developer.android.com/about/versions/12) and the target SDK version is 32
+- [Android 15 / API 35+](https://developer.android.com/about/versions/15) and the target SDK version is **36**
 
 ### My app’s target android version is different from that of sharpsell. How do I integrate sharpsell SDK?
 
 - We would recommend you update the target android version and compile SDK version of your application in the same as the sharpsell SDK versions, by doing this it will be easy to the compilation as well as target API-level features will be effective in both sharpsell SDK and your application.
-- To integrate sharpsell sdk please follow the link : [https://docs.enparadigmtech.com/](https://docs.enparadigmtech.com/)
+- To integrate Sharpsell SDK please follow the Android setup guide in this documentation.
 
 ## What is `API Level`?
 
@@ -49,9 +49,10 @@ compatible with all versions and you have not declared the proper **`minSdkVers
 
 ### Sharpsell Sdk’s minimum and target version.
 
-| Minimum Sdk Version | 21 (Lollipop) |
+| Minimum Sdk Version | 28 |
 | --- | --- |
-| Target Sdk Version | 32 (Android 12) |
+| Target Sdk Version | 36 |
+| Compile Sdk Version | 36 |
 | Max Sdk Version | Not defined. |
 
 ### Compatibility check for target version

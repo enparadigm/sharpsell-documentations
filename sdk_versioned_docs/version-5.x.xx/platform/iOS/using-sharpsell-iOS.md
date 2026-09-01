@@ -47,13 +47,13 @@ metaData["is_reviewer"] = ""
 metaData["date"] = ""
 
 var reportingData = [String: Any]()
-reportingData["identifier_type"] = ""
+reportingData["identifier_type"] = "unique_id"
 reportingData["identifier_value"] = ""
 
 var fields = [String: Any]()
 fields["first_name"] = ""
 fields["last_name"] = ""
-fields["identifier_type"] = ""
+fields["identifier_type"] = "unique_id"
 fields["phone"] = ""
 fields["email"] = ""
 fields["external_unique_id"] = ""
@@ -73,8 +73,9 @@ fields["reporting_to"] = reportingData
             "sharpsell_api_key": "", //  API Key given by the sharpsell team
             "user_unique_id": "unique_id_of_the_user", // User unique id or user external id which is the id of the user which you are trying to login
             "fcm_token": firebaseToken, // Pass the firebase token which will be used of push notification          
-             "user_details": fields] //Only pass the user_details key if you want to update user fields
-              
+             "user_details": fields, //Only pass the user_details key if you want to update user fields
+             "client_data": ["language": "english"] // Optional. Pass company-specific client data only if Sharpsell team asks you to.
+        ]
 
         Sharpsell.services.initialize(smartsellParameters: initSharpsellData) {
             //Flutter initialized succecfully
@@ -216,7 +217,7 @@ Make sure to call ` Sharpsell.services.initialize` function before calling any o
 To open the Sharpsell home screen from your app use the below function
 
 ```swift
-       Sharpsell.services.open(arguments: [:]){ (flutterViewController) in
+       Sharpsell.services.open(arguments: ""){ (flutterViewController) in
             self.navigationController?.pushViewController(flutterViewController, animated: true)
         } onFailure: { (errorMessage, smartSellError) in
             switch smartSellError {
@@ -255,8 +256,8 @@ let presentationArgs = ["route" : "productPresentationInput",
     }
 ```
 :::note
-We need to pass proper `presentationInputName` and input fields as per the presentation. 
-If the presentation input name is not valid then it will just open the customer presentation screen.
+We need to pass a valid `presentation_name` and input fields as per the presentation.
+If the presentation name is not valid then it will just open the customer presentation screen.
 :::
 
 ### Launchpad Screen
@@ -309,14 +310,14 @@ To open the custom mappped directory screen from your app use the below function
 
 :::info
 
-Contact sharpsell team before integrating the custom directory as it has to be mapped first by them. They will provide you the value to pass in ``app_url``.
+Contact sharpsell team before integrating the custom directory as it has to be mapped first by them. They will provide you the value to pass in ``entry_point``.
 
 :::
 
 ```swift
 
-      let mcDirArgs = ["route" : "mcDirectory"]
-      mcDirArgs["app_url"] = "1" // value added here is for sample
+      let mcDirArgs: [String: Any] = ["route" : "mcDirectory",
+                                     "entry_point": "1"] // directory id provided by the Sharpsell team
 
      var sharpsellOpenDataInString: String? =  Sharpsell.services.convertJsonToString(dict: mcDirArgs)
 
@@ -440,6 +441,75 @@ To open Sharpsell quick links screen from your app use the below function
             default:
                 debugPrint("")
             }
+```
+
+### Your Progress Screen
+
+To open the Sharpsell your progress screen from your app use the below function
+
+```swift
+     let yourProgressArgs = ["route" : "yourProgress"]
+
+     var sharpsellOpenDataInString: String? =  Sharpsell.services.convertJsonToString(dict: yourProgressArgs)
+
+    Sharpsell.services.open(arguments: sharpsellOpenDataInString  ?? ""){ (flutterViewController) in
+            self.navigationController?.pushViewController(flutterViewController, animated: true)
+        } onFailure: { (errorMessage, smartSellError) in
+            switch smartSellError {
+            case .flutterError:
+                debugPrint("Error Message: \(errorMessage)")
+            case .flutterMethodNotImplemented:
+                debugPrint("")
+            default:
+                debugPrint("")
+            }
+        }
+```
+
+### PitchWiz Screen
+
+To open the Sharpsell PitchWiz screen from your app use the below function
+
+```swift
+     let pitchWizArgs = ["route" : "pitchWiz"]
+
+     var sharpsellOpenDataInString: String? =  Sharpsell.services.convertJsonToString(dict: pitchWizArgs)
+
+    Sharpsell.services.open(arguments: sharpsellOpenDataInString  ?? ""){ (flutterViewController) in
+            self.navigationController?.pushViewController(flutterViewController, animated: true)
+        } onFailure: { (errorMessage, smartSellError) in
+            switch smartSellError {
+            case .flutterError:
+                debugPrint("Error Message: \(errorMessage)")
+            case .flutterMethodNotImplemented:
+                debugPrint("")
+            default:
+                debugPrint("")
+            }
+        }
+```
+
+### Profile Screen
+
+To open the Sharpsell profile screen from your app use the below function
+
+```swift
+     let profileArgs = ["route" : "profile"]
+
+     var sharpsellOpenDataInString: String? =  Sharpsell.services.convertJsonToString(dict: profileArgs)
+
+    Sharpsell.services.open(arguments: sharpsellOpenDataInString  ?? ""){ (flutterViewController) in
+            self.navigationController?.pushViewController(flutterViewController, animated: true)
+        } onFailure: { (errorMessage, smartSellError) in
+            switch smartSellError {
+            case .flutterError:
+                debugPrint("Error Message: \(errorMessage)")
+            case .flutterMethodNotImplemented:
+                debugPrint("")
+            default:
+                debugPrint("")
+            }
+        }
 ```
 
 ### Logout and clear user data

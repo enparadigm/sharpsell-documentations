@@ -5,13 +5,6 @@ slug: 'android_implementation'
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ReactPlayer from 'react-player';
-
-<br></br>
-<ReactPlayer playing controls url='/videos/android_usage.mp4'/>
-<br></br>
-
-**[Open Android Sample App](https://github.com/enparadigm/sharpsell_android_sample)**
 
 
 ## Step 1: Create the SharpSell Engine
@@ -64,46 +57,54 @@ A sample code on how to initialize the SDK is given below.
 <Tabs>
 <TabItem value="Java">
 ```
+:::note
+You can pass user fields with initialising the sdk to update user details.
+Create a json object with user fields and pass it inside the initialize function.
 
-
+**Please confirm user fields with sharpsell team before passing it.**
 ```java
-// sample user meta data
-// this data can be used to update or create user meta details, if you don't have user meta then pass it as empty string
+JSONObject metaData = new JSONObject();
+metaData.put("designation", "");
+metaData.put("branch", "");
+metaData.put("is_reviewer", "");
+metaData.put("date", "");
 
-val userMeta = JSONObject()
-userMeta.put("user_category", "user_Category")
-userMeta.put("unique_id", "11111111")
-userMeta.put("location_code","loc_Id")
-userMeta.put("so_code", "11")
-userMeta.put("ro_code", "1111")
-userMeta.put("name", "Test User")
-userMeta.put("doj", "date")
-userMeta.put("employee_code", "12345")
-userMeta.put("business_unit", "Micro Business Loan")
-userMeta.put("designation", "DST11")
-userMeta.put("state", "state_Name")
-userMeta.put("city", "city_Name")
-userMeta.put("zone", "zone_Name")
-userMeta.put("cluster", "Belgaum")
-userMeta.put("branch", "branch_Id")
-userMeta.put("status", "ACTIVE")
-userMeta.put("branch_name", "branch_Name")
-userMeta.put("reporting_manager", "test9@test9.com")
-userMeta.put("bu_type", "URBAN")
-userMeta.put("user_type","user_Type")
+JSONObject reportingData = new JSONObject();
+reportingData.put("identifier_type", "");
+reportingData.put("identifier_value", "");
+
+
+JSONObject fields = new JSONObject();
+fields.put("first_name", "");
+fields.put("last_name", "");
+fields.put("identifier_type", "unique_id");
+fields.put("phone", "");
+fields.put("email", "");
+fields.put("external_unique_id", "");
+fields.put("profile_image_url", "");
+fields.put("user_meta_data", metaData);
+fields.put("reporting_to", reportingData);
+```
+:::
+
+### Call the below function to initialize the SDK
+```java
 
 JSONObject data = new JSONObject();
 data.put("company_code", "company Code"); // Company code given to you by sharpsell team
-data.put("user_unique_id", "unique ser identifier"); // Pass the unique id which is releated to the particular user
-data.put("user_group_id", 1);  // User Group ID given to you by sharpsell team
-data.put("country_code", "");
-data.put("user_meta", userMeta.toString())  // If you have user meta, pass those as a string. 
-// data.put("user_meta", "") // If you don't have user meta then pass empty string as a value
-data.put("name", "Test User"); // Pass the user name who is trying to login
-data.put("mobile_number", "8888888888");  // Pass the user mobile number who is trying to login
-data.put("email", "test@test.com"); // Pass the user email id whoc is trying to login, if you were not maintaing then pass it as empty string
+data.put("base_url", ""); //This is non mandatory field. Check with sharpsell team if you need pass this value for your company or not.If yes, sharpsell team will provide this information. 
+data.put("sharpsell_api_key", "sharpsell api key"); // API Key given by the sharpsell team
+data.put("user_unique_id", "");  // User unique id or user external id which is the id of the user which you are trying to login
+
 //Pass the below key to enable push notification to be recived on your device
 data.put("fcm_token", fcmToken);
+
+//Only pass the below key if you want to update user fields
+data.put("user_details", fields);
+
+JSONObject clientData = new JSONObject();
+clientData.put("language", "english");
+data.put("client_data", clientData); // Optional. Pass company-specific client data only if Sharpsell team asks you to.
 
 Sharpsell.INSTANCE.initialize(
         MainActivity.this,
@@ -128,48 +129,57 @@ Sharpsell.INSTANCE.initialize(
 </TabItem>
 <TabItem value="Kotlin">
 ```
+:::note
+You can pass user fields with initialising the sdk to update user details.
+Create a json object with user fields and pass it inside the initialize function.
 
+**Please confirm user fields with sharpsell team before passing it.**
 ```java
-// sample user meta data
-// this data can be used to update or create user meta details, if you don't have user meta then pass it as empty string
+val metaData = JSONObject()
+metaData.put("designation", "")
+metaData.put("branch", "")
+metaData.put("is_reviewer", "")
+metaData.put("date", "")
 
-val userMeta = JSONObject()
-userMeta.put("user_category", "user_Category")
-userMeta.put("unique_id", "11111111")
-userMeta.put("location_code","loc_Id")
-userMeta.put("so_code", "11")
-userMeta.put("ro_code", "1111")
-userMeta.put("name", "Test User")
-userMeta.put("doj", "date")
-userMeta.put("employee_code", "12345")
-userMeta.put("business_unit", "Micro Business Loan")
-userMeta.put("designation", "DST11")
-userMeta.put("state", "state_Name")
-userMeta.put("city", "city_Name")
-userMeta.put("zone", "zone_Name")
-userMeta.put("cluster", "Belgaum")
-userMeta.put("branch", "branch_Id")
-userMeta.put("status", "ACTIVE")
-userMeta.put("branch_name", "branch_Name")
-userMeta.put("reporting_manager", "test9@test9.com")
-userMeta.put("bu_type", "URBAN")
-userMeta.put("user_type","user_Type")
+val reportingData = JSONObject()
+reportingData.put("identifier_type", "")
+reportingData.put("identifier_value", "")
+
+val fields = JSONObject()
+fields.put("first_name", "")
+fields.put("last_name", "")
+fields.put("identifier_type", "unique_id")
+fields.put("phone", "")
+fields.put("email", "")
+fields.put("external_unique_id", "")
+fields.put("profile_image_url", "")
+fields.put("user_meta_data", metaData)
+fields.put("reporting_to", reportingData)
+```
+:::
+
+```kotlin
 
 val data = JSONObject()
-data.put("company_code", companyCode);
-data.put("user_unique_id", "unique user identifier");
-data.put("user_group_id", user_group_id); //int value
-data.put("country_code", null)
-data.put("user_meta", userMeta.toString())
-data.put("name", "Test Name")
-data.put("mobile_number", "8888888888")
-data.put("email", "test@test.com")
+data.put("company_code", "company Code") // Company code given to you by sharpsell team
+data.put("base_url", "") //This is non mandatory field. Check with sharpsell team if you need pass this value for your company or not.If yes, sharpsell team will provide this information. 
+data.put("sharpsell_api_key", "sharpsell api key") // API Key given by the sharpsell team
+data.put("user_unique_id", "")  // User unique id or user external id which is the id of the user which you are trying to login
+
 //Pass the below key to enable push notification to be recived on your device
-data.put("fcm_token", fcmToken);
+data.put("fcm_token", fcmToken)
+
+//Only pass the below key if you want to update user fields
+data.put("user_details", fields)
+
+val clientData = JSONObject()
+clientData.put("language", "english")
+data.put("client_data", clientData) // Optional. Pass company-specific client data only if Sharpsell team asks you to.
+
 
 Sharpsell.initialize(
             this@MainActivity,
-            data,
+            data.toString(),
             object : SuccessListener {
                 override fun onSuccess() {
                     // Successfully Initialized
@@ -196,11 +206,14 @@ Sharpsell.initialize(
 :::note
 Sharpsell team will provide the following items.
 1. company_code
-2. user_group_id
+2. sharpsell_api_key
+3. base_url
 :::
 
 ## Step 3: Handling Notification
 Sharpsell notifications can be handled in the `FirebaseMessagingService` class.
+
+On Android 13 (API 33) and above, request the `POST_NOTIFICATIONS` permission before notifications can be shown.
 
 
 
@@ -337,8 +350,8 @@ Sharpsell.open(this@MainActivity, data.toString())
 ```
 
 :::note
-We need to pass proper `presentationInputName` and input fields as per the presentation. 
-If the presentation input name is not valid then it will just open the customer presentation screen.
+We need to pass a valid `presentation_name` and input fields as per the presentation.
+If the presentation name is not valid then it will just open the customer presentation screen.
 :::
 
 ### Launchpad Screen
@@ -425,7 +438,7 @@ Contact sharpsell team before integrating the custom directory as it has to be m
 ```java
 JSONObject data = new JSONObject();
 data.put("route", "mcDirectory");
-data.put("entry_point", 1); // value added here is for sample
+data.put("entry_point", "1"); // directory id provided by the Sharpsell team
 
 Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
 ```
@@ -438,7 +451,7 @@ Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
 ```kotlin
 val data = JSONObject()
 data.put("route", "mcDirectory")
-data.put("entry_point", 1) // value added here is for sample
+data.put("entry_point", "1") // directory id provided by the Sharpsell team
 
 Sharpsell.open(this@MainActivity, data.toString())
 ```
@@ -580,9 +593,40 @@ Sharpsell.open(this@MainActivity, data.toString())
 
 
 
+### Quick Links Screen
+
+To open Sharpsell quick links screen from your app use the below function
+
+```mdx-code-block
+<Tabs>
+<TabItem value="Java">
+```
+
+```java
+JSONObject data = new JSONObject();
+data.put("route", "quickLinks");
+Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Kotlin">
+```
+
+```kotlin
+val data = JSONObject()
+data.put("route", "quickLinks")
+Sharpsell.open(this@MainActivity, data.toString())
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
 ### Your Progress Screen
 
-To open Sharpsell your progress screen from your app use the below function
+To open the Sharpsell your progress screen from your app use the below function
 
 ```mdx-code-block
 <Tabs>
@@ -611,11 +655,9 @@ Sharpsell.open(this@MainActivity, data.toString())
 </Tabs>
 ```
 
+### PitchWiz Screen
 
-
-### Quick Links Screen
-
-To open Sharpsell quick links screen from your app use the below function
+To open the Sharpsell PitchWiz screen from your app use the below function
 
 ```mdx-code-block
 <Tabs>
@@ -624,7 +666,7 @@ To open Sharpsell quick links screen from your app use the below function
 
 ```java
 JSONObject data = new JSONObject();
-data.put("route", "quickLinks");
+data.put("route", "pitchWiz");
 Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
 ```
 
@@ -635,7 +677,38 @@ Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
 
 ```kotlin
 val data = JSONObject()
-data.put("route", "quickLinks")
+data.put("route", "pitchWiz")
+Sharpsell.open(this@MainActivity, data.toString())
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+### Profile Screen
+
+To open the Sharpsell profile screen from your app use the below function
+
+```mdx-code-block
+<Tabs>
+<TabItem value="Java">
+```
+
+```java
+JSONObject data = new JSONObject();
+data.put("route", "profile");
+Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Kotlin">
+```
+
+```kotlin
+val data = JSONObject()
+data.put("route", "profile")
 Sharpsell.open(this@MainActivity, data.toString())
 ```
 
@@ -695,8 +768,8 @@ Sharpsell.INSTANCE.enableLogsInProductionSdk(MainActivity.this, true);
 <TabItem value="Kotlin">
 ```
 
-```
-Sharpsell.INSTANCE.enableLogsInProductionSdk(MainActivity.this, true)
+```kotlin
+Sharpsell.enableLogsInProductionSdk(this@MainActivity, true)
 ```
 
 ```mdx-code-block

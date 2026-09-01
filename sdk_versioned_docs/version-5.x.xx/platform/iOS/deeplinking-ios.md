@@ -58,7 +58,7 @@ func application(_ application: UIApplication, continue userActivity: NSUserActi
         
             let dvcArgs = ["route" : link]
             var sharpsellOpenDataInString = Sharpsell.services.convertJsonToString(dict: dvcArgs) ?? ""
-            if defaults.bool(forKey: "isUserLoggedIn"){
+            if isUserLoggedIn {
                 Sharpsell.services.open(arguments: sharpsellOpenDataInString) { flutterViewController in
                     flutterViewController.navigationController?.navigationBar.isHidden = true
                     flutterViewController.modalPresentationStyle = .fullScreen
