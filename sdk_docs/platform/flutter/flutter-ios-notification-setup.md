@@ -41,7 +41,7 @@ import os
                 NSLog("Sharpsell:  Deeplink key from notification payload -  \(moe_deeplink)")
                 let updatedMoLink = moe_deeplink.replacingOccurrences(of: "https", with: "sharpsell")
 
-                NSLog("Sharpsell:  Deeplink url https to shrpsell updated -  \(updatedMoLink)")
+                NSLog("Sharpsell:  Deeplink url https to sharpsell updated -  \(updatedMoLink)")
 
                 if let moeDeepLinkURL = URL(string: updatedMoLink) {
 
@@ -77,11 +77,11 @@ import os
                     case .notDetermined:
                         NSLog("Sharpsell - ATT NotDetermined - unknown error ❌")
                     case .restricted:
-                        NSLog("Sharpsell - ATT Resetricted - Device has an MDM solution applied ❌")
+                        NSLog("Sharpsell - ATT Restricted - Device has an MDM solution applied ❌")
                     case .denied:
                         NSLog("Sharpsell - ATT consent denied by user ❌")
                     case .authorized:
-                        NSLog("Sharpsell - ATT authirized ✅ ")
+                        NSLog("Sharpsell - ATT authorized ✅ ")
                     default:
                         NSLog("Sharpsell - ATT unknown error ❌")
                     }
@@ -112,7 +112,7 @@ import os
                     let sdkConfig = MoEngageSDKConfig(appId: moengageAppId, dataCenter: .data_center_01);
                     
 //                     sdkConfig.enableLogs = true
-                    //FIXME: While publishin the app to test flight or appstore we should use commented code.
+                    //FIXME: While publishing the app to test flight or appstore we should use commented code.
                     //Surya - Write macros which will call proper method on debug and release mode
                     MoEngageInitializer.sharedInstance.initializeDefaultInstance(sdkConfig)
 //                    MoEngage.sharedInstance.enableSDK()
@@ -162,7 +162,7 @@ extension AppDelegate{
         super.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken);
         //Call only if MoEngageAppDelegateProxyEnabled is NO
         MoEngageSDKMessaging.sharedInstance.setPushToken(deviceToken)
-        NSLog("Sharpsell:  Recived Device Token ✅ and shared the same with mo engage")
+        NSLog("Sharpsell:  Received Device Token ✅ and shared the same with mo engage")
         
     }
     
@@ -176,22 +176,22 @@ extension AppDelegate{
     override func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse,
                                          withCompletionHandler completionHandler: @escaping () -> Void) {
         
-        NSLog("Sharpsell : did recived notfivations on userNotificationCenter - didReceive")
+        NSLog("Sharpsell : did received notifications on userNotificationCenter - didReceive")
         
         
         //Call only if MoEngageAppDelegateProxyEnabled is NO
    //     MoEngageSDKMessaging.sharedInstance.userNotificationCenter(center, didReceive: response)
         
-        //Custom Handling of notification from mo enagage deeplink
+        //Custom Handling of notification from mo engage deeplink
         let notificationInfo = response.notification.request.content.userInfo
-        NSLog("Sharpsell:  Recived Notfication and the dict is \(notificationInfo)")
+        NSLog("Sharpsell:  Received Notification and the dict is \(notificationInfo)")
       
         if let app_extra = notificationInfo["app_extra"] as? [AnyHashable : Any],
            let moe_deeplink = app_extra["moe_deeplink"] as? String{
             NSLog("Sharpsell:  Deeplink key from notification payload -  \(moe_deeplink)")
             let updatedMoLink = moe_deeplink.replacingOccurrences(of: "https", with: "sharpsell")
 
-            NSLog("Sharpsell:  Deeplink url https to shrpsell updated -  \(updatedMoLink)")
+            NSLog("Sharpsell:  Deeplink url https to sharpsell updated -  \(updatedMoLink)")
 
             guard let moeDeepLinkURL = URL(string: updatedMoLink) else {
                 NSLog("Sharpsell:  Not able to convert the moe deeplink string to URL - \(moe_deeplink)")

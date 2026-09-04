@@ -78,7 +78,7 @@ fields["reporting_to"] = reportingData
         ]
 
         Sharpsell.services.initialize(smartsellParameters: initSharpsellData) {
-            //Flutter initialized succecfully
+            //Flutter initialized successfully
         } onFailure: { (errorMessage, smartsellError) in
             switch smartsellError {
             case .flutterError:
@@ -131,7 +131,7 @@ Call the `isSharpsellNotification` function in the `didReceiveRemoteNotification
             }
             
         } onFailure: { message, errorType in
-            NSLog("Sharpsell Parent App - error in validation sharpsell notifccation - \(message)")
+            NSLog("Sharpsell Parent App - error in validation sharpsell notification - \(message)")
         }
     }
 ```
@@ -140,11 +140,11 @@ Call the below method in the `didReceive` notification delegate method which wil
 
 ```swift title="AppDelegate.swift"
  
-   // This function will be called on click on the sharpsell notifcation
+   // This function will be called on click on the sharpsell notification
    func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse) async {
         let notificationInfo = response.notification.request.content.userInfo
-        NSLog("Sharpsell Parent App: did recived notfications on userNotificationCenter - didReceive")
+        NSLog("Sharpsell Parent App: did received notifications on userNotificationCenter - didReceive")
         NSLog("Sharpsell Parent App: - \(notificationInfo)")
         if let app_extra = notificationInfo["app_extra"] as? [AnyHashable : Any],let moe_deeplink = app_extra["moe_deeplink"] as? String{
             Sharpsell.services.setNotificationDataWhenDidReceive(center, response)
@@ -171,7 +171,7 @@ Call the below method in the `didReceive` notification delegate method which wil
             }
         } else {
             Sharpsell.services.handleNotificationRedirection(notificationData: notificationInfo) { notificationData in
-                NSLog("Sharpsell Parent App- Notification opend Successfull 🥳")
+                NSLog("Sharpsell Parent App- Notification opened Successful 🥳")
                 NSLog("Sharpsell Parent App : notificationData - \(notificationData)")
 
                 Sharpsell.services.setNotificationDataWhenDidReceive(center, response)
@@ -196,7 +196,7 @@ Call the below method in the `didReceive` notification delegate method which wil
                 }
 
             } onFailure: { message, errorType in
-                NSLog("Sharpsell Parent App - Failed to handle notfication ❌")
+                NSLog("Sharpsell Parent App - Failed to handle notification ❌")
             }
         }
     }
@@ -306,7 +306,7 @@ To open the Sharpsell marketing collateral directory screen from your app use th
 
 #### Custom Marketing Collateral Directory Screen
 Sharpsell also has the ability to open a specific marketing collateral directory directly without going through the marketing collateral screen.
-To open the custom mappped directory screen from your app use the below function (all we need to do is add an entry point along with the 'mcDirectory' route)
+To open the custom mapped directory screen from your app use the below function (all we need to do is add an entry point along with the 'mcDirectory' route)
 
 :::info
 
@@ -517,9 +517,9 @@ Call the Sharpsell clear data function while the user is logged out from the app
 
 ```swift
       Sharpsell.services.clearData {
-                //Handle logut success
+                //Handle logout success
             } onFailure: { message, errorType in
-                //Logut Failed
+                //Logout Failed
             }
 ```
 

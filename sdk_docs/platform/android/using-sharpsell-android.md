@@ -96,7 +96,7 @@ data.put("base_url", ""); //This is non mandatory field. Check with sharpsell te
 data.put("sharpsell_api_key", "sharpsell api key"); // API Key given by the sharpsell team
 data.put("user_unique_id", "");  // User unique id or user external id which is the id of the user which you are trying to login
 
-//Pass the below key to enable push notification to be recived on your device
+//Pass the below key to enable push notification to be received on your device
 data.put("fcm_token", fcmToken);
 
 //Only pass the below key if you want to update user fields
@@ -166,7 +166,7 @@ data.put("base_url", "") //This is non mandatory field. Check with sharpsell tea
 data.put("sharpsell_api_key", "sharpsell api key") // API Key given by the sharpsell team
 data.put("user_unique_id", "")  // User unique id or user external id which is the id of the user which you are trying to login
 
-//Pass the below key to enable push notification to be recived on your device
+//Pass the below key to enable push notification to be received on your device
 data.put("fcm_token", fcmToken)
 
 //Only pass the below key if you want to update user fields
@@ -422,7 +422,7 @@ Sharpsell.open(this@MainActivity, data.toString())
 
 #### Custom Marketing Collateral Directory Screen
 Sharpsell also has the ability to open a specific marketing collateral directory directly without going through the marketing collateral screen.
-To open the custom mappped directory screen from your app use the below function (all we need to do is add an entry point along with the 'mcDirectory' route)
+To open the custom mapped directory screen from your app use the below function (all we need to do is add an entry point along with the 'mcDirectory' route)
 
 :::info
 

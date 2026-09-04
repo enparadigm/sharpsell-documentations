@@ -70,7 +70,7 @@ We need this Application Queries Schemes for deeplink to work in the integrated 
 </details>
 
 :::warning Adding user permission in info.plist
-We need to add all the above user permission to your `info.plist` file. If not you may get rejections while updloading the app to the AppStore connect.
+We need to add all the above user permission to your `info.plist` file. If not you may get rejections while uploading the app to the AppStore connect.
 
 Please go through the sample app info.plist file, if you want some examples of how to add this permission on iOS
 :::
@@ -80,7 +80,7 @@ Please go through the sample app info.plist file, if you want some examples of h
 We need add the domains to make the deeplink work in the integrated app.
 
 To add the associated domain follow the below steps,
-1. Natvigate to your target and click on Signing & Capabilities 
+1. Navigate to your target and click on Signing & Capabilities 
 2. Click on (+ Capability) button and once it is clicked it will add the Associated domain.
 3. In Associated domain, click on the (+) button. And the given applink domain name in the text box and click on enter.
 
@@ -143,7 +143,7 @@ Use Release frameworks while pushing to the app store and test flight.
 
 ## Testing Sharpsell in iOS Simulators
 
-To run in iOS Simulators, we need to use debug version. So, if you are testing the app in the simulator then use XCFramrworks which is available in Debug Folder and replace those into the
+To run in iOS Simulators, we need to use debug version. So, if you are testing the app in the simulator then use XCFrameworks which is available in Debug Folder and replace those into the
 project as mentioned above.
 
 :::danger Use Release framework for release build

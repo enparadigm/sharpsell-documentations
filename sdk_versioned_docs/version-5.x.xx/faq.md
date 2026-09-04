@@ -70,11 +70,11 @@ If you pass null or "null" then the server will send an invalid email address
 </details>
 
 <details>
-<summary>Notification not recived</summary>
+<summary>Notification not received</summary>
 
 As mentioned in the document, you have to pass the fcm token to Sharpsell SDK.
 
-Even after passing the fcm key, you are not receiving any push notification which is triggered on the Sharpsell admin pannel then check your firebase integration on your app, and if it is integrated properly as mentioned in the firebase documentation. 
+Even after passing the fcm key, you are not receiving any push notification which is triggered on the Sharpsell admin panel then check your firebase integration on your app, and if it is integrated properly as mentioned in the firebase documentation. 
 
 Please reach Sharpsell team if the above resolution is not fixing your issues.
 </details>
