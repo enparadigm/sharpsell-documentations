@@ -1,6 +1,6 @@
 ---
 title: "Android Version Policy"
-sidebar_position: 3
+sidebar_position: 4
 slug: 'android_version_details'
 ---
 
