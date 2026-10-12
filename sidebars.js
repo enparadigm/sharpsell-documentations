@@ -27,6 +27,11 @@ const sidebars = {
         },
         {
           type: "link",
+          label: "Data flow",
+          href: "/sdk/data-flow",
+        },
+        {
+          type: "link",
           label: "Platforms",
           href: "/sdk/category/platforms",
         },
