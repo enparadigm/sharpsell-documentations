@@ -31,6 +31,11 @@ const sidebars = {
         },
         {
           type: "link",
+          label: "Permissions",
+          href: "/sdk/permissions",
+        },
+        {
+          type: "link",
           label: "Platforms",
           href: "/sdk/category/platforms",
         },
