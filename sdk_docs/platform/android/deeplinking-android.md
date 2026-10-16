@@ -5,79 +5,82 @@ slug: 'deeplinking-android'
 ---
 
 ## Pre-Requisites
-1. All the steps of Sharpsell sdk integrations has to be completed before adding deeplinking support.
+1. All the steps of Sharpsell SDK integration have to be completed before adding deeplinking support.
 
-2. For Android : Assetlinks.json with valid package name and signature has to be uploaded on deeplinking domain in following path (https://{base-domain}/.well-known/assetlinks.json)
+2. For Android: `assetlinks.json` with a valid package name and signature has to be uploaded on the deeplinking domain at `https://{base-domain}/.well-known/assetlinks.json`.
 
-3. For iOS : apple-app-site-association with valid app identifier and team Id has to be uploaded on deeplinking domain on following path ([https://{base-domain}/apple-app-site-association](https://enparadigmtech.com/apple-app-site-association))
+3. Disable Flutter's default deep linking on the host activity so Sharpsell can handle the URL.
 
+## Step 1: Adding deeplinking URLs in the Android Manifest file.
 
-## Step 1: Adding Deeplinking urls in Android Manifest file.
+Add the intent filters on the launcher activity (`singleTop`). Replace the hosts with the domains given by the Sharpsell team.
 
-Create the Sharpsell Engine with the `Application Context` in the `Application Class`.
-
-```
+```xml
 <activity
-            android:name=".ACTIVITY NAME"
-            android:launchMode="singleTop"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:host="sharpsell-demo-dev.enparadigmtech.com" />
-//above is deeplinking the host url 
-            
-            </intent-filter>
-        </activity>
+    android:name=".MainActivity"
+    android:launchMode="singleTop"
+    android:exported="true">
+    <meta-data android:name="flutter_deeplinking_enabled" android:value="false" />
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+    <intent-filter android:autoVerify="true">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="http" />
+        <data android:scheme="https" />
+        <data android:host="*.enparadigmtech.com" android:pathPrefix="/app" />
+        <data android:host="*.enparadigmtech.com" android:pathPrefix="/core/v1/verify" />
+        <data android:host="*.enparadigmtech.com" android:pathPrefix="/static/authenticate" />
+        <data android:host="*.sharpselltech.com" android:pathPrefix="/app" />
+        <data android:host="*.sharpselltech.com" android:pathPrefix="/core/v1/verify" />
+        <data android:host="*.sharpselltech.com" android:pathPrefix="/static/authenticate" />
+    </intent-filter>
+</activity>
 ```
 
-## Step 2: need to implement onNewIntent method in first launcher activity ( mostly MainActivity). same handling must to be added inside onCreate method.
+:::note
+Sharpsell team will confirm the exact hosts and path prefixes for your company. Do not copy a demo host unless they give you that domain.
+:::
+
+## Step 2: Handle the incoming URL in the launcher activity.
+
+Implement `onNewIntent` and call the same handler from `onCreate`. Open Sharpsell only after the user is logged in to your app (use your own login state, not an SDK helper).
 
 ```java
-public class MainActivity extends AppCompatActivity  {
-    
-    @Override
-    onCreate(@Nullable Bundle savedInstanceState) {
-        /***
-         Existining code of onCreate
-         ***/
+public class MainActivity extends AppCompatActivity {
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Existing onCreate code
         handleIntent(getIntent());
     }
 
+    @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         handleIntent(intent);
     }
 
     private void handleIntent(Intent intent) {
-        String appLinkAction = intent.getAction();
         Uri appLinkData = intent.getData();
-        if(PrefHelper.INSTANCE.isLoggedIn(this)) {
-            if (appLinkData != null) {
-                String url = appLinkData.toString();
-                try {
-                    Log.d("URL", url);
-                    JSONObject data = new JSONObject();
-                    data.put("route", url);
-                    Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
+        if (!isUserLoggedIn()) {
+            return;
         }
-        else {
-            Log.d("URL","USER NOT LOGGED IN");
+        if (appLinkData != null) {
+            try {
+                JSONObject data = new JSONObject();
+                data.put("route", appLinkData.toString());
+                Sharpsell.INSTANCE.open(MainActivity.this, data.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
 ```
- 
+
+`isUserLoggedIn()` should check your host app session. Pass the full URL as `route` so Sharpsell can stash an `https` deep link and open the matching screen after SDK login.
