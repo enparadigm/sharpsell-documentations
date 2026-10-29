@@ -28,7 +28,7 @@ There is something called `<uses-sdk/>` contained in `<manifest>` which lets you
 <summary>Push notification not receiving?</summary>
 Check you have added the handle notification code or not on your onMessageReceived function from FirebaseMessagingService class.
 
-Find here - https://docs.enparadigmtech.com/platform/android/android_implementation#step-3-handling-notification
+Find here - [Handling notification](/android_implementation#step-3-handling-notification)
 
 </details>
 
@@ -70,11 +70,11 @@ If you pass null or "null" then the server will send an invalid email address
 </details>
 
 <details>
-<summary>Notification not recived</summary>
+<summary>Notification not received</summary>
 
 As mentioned in the document, you have to pass the fcm token to Sharpsell SDK.
 
-Even after passing the fcm key, you are not receiving any push notification which is triggered on the Sharpsell admin pannel then check your firebase integration on your app, and if it is integrated properly as mentioned in the firebase documentation. 
+Even after passing the fcm key, you are not receiving any push notification which is triggered on the Sharpsell admin panel then check your firebase integration on your app, and if it is integrated properly as mentioned in the firebase documentation. 
 
 Please reach Sharpsell team if the above resolution is not fixing your issues.
 </details>

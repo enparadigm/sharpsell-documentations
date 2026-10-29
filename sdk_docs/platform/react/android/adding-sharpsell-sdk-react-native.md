@@ -11,36 +11,41 @@ import ReactPlayer from 'react-player';
 
 <br></br>
 
-**[Open React sample app](https://github.com/enparadigm/sharpsell_android_sample)**
-
+React Native Android uses the **same Android SDK AAR** as the native Android integration (`com.enparadigm.sharpsell:sdk`). Follow the native Android Gradle requirements, then wrap the SDK in a React Native package.
 
 ## Pre-Requisites
-1. The application should be migrated to AndroidX. Check if the following line is present in the project level `gradle.properties`. If this line is not present, the project needs to be migrated to [androidX](https://developer.android.com/jetpack/androidx/migrate).
+
+1. The application should be migrated to AndroidX. Check if the following line is present in the project-level `gradle.properties`. If this line is not present, the project needs to be migrated to [AndroidX](https://developer.android.com/jetpack/androidx/migrate).
 
 ```gradle
 android.useAndroidX=true
 ```
-2. The minimum android SDK version should be at least 21.
+
+2. The minimum Android SDK version should be at least 28, and the app should target API 36.
+
 ```gradle
-minSdkVersion 21
+minSdkVersion 28
+targetSdkVersion 36
+compileSdk 36
 ```
 
-3. Firebase should be enabled and the `google-seriveces.json` file should be properly set up.
+3. Use Java 17. Enable core library desugaring.
+
+4. Firebase should be enabled and the `google-services.json` file should be properly set up.
 
 :::tip Firebase setup
 Firebase setup has to be done in order to enable push notification and analytics on Sharpsell SDK.
-To set up android firebase setup follow this - https://rnfirebase.io/
+For a React Native host you can use either the [Google Android Firebase setup](https://firebase.google.com/docs/android/setup) or [React Native Firebase](https://rnfirebase.io/).
 :::
 
+5. On Android 13 (API 33) and above, request `POST_NOTIFICATIONS` before showing Sharpsell notifications.
+
 ## Installation
-1. Add the following lines to the project-level `builds.gradle` file.
+
+1. Add the following lines to the project-level `build.gradle` file.
+
 ```gradle
 allprojects {
-    configurations.all {
-        resolutionStrategy {
-            force "com.facebook.react:react-native:" + REACT_NATIVE_VERSION
-        }
-    }
     repositories {
         mavenLocal()
         maven {
@@ -51,13 +56,10 @@ allprojects {
             // Android JSC is installed from npm
             url(new File(['node', '--print', "require.resolve('jsc-android/package.json')"].execute(null, rootDir).text.trim(), '../dist'))
         }
+        google()
         mavenCentral()
-        jcenter()
-        maven { url 'https://storage.googleapis.com/download.flutter.io' }
-        maven { url "https://jitpack.io" }
-        maven { url "https://maven.google.com" }
         maven {
-            url 'http://artifactory.enparadigm.com/artifactory/sharpsell'
+            url 'https://artifactory.sharpselltech.com/artifactory/sharpsell_sdk'
             credentials {
                 username = artifactory_username
                 password = artifactory_password
@@ -66,41 +68,71 @@ allprojects {
     }
 }
 ```
+
 :::info
-Sharpsell team will give the artifactory_username and artifactory_password. 
+Sharpsell team will give the `artifactory_username` and `artifactory_password`.
 :::
 
-2. Add the following lines to the app-level `builds.gradle` file.
+2. Add the following lines to the app-level `build.gradle` file.
+
 ```gradle
 android {
+    compileSdk 36
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
-    dataBinding {
-        enabled = true
+
+    defaultConfig {
+        minSdkVersion 28
+        targetSdkVersion 36
+    }
+
+    buildTypes {
+        release {
+            ndk {
+                abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
+            }
+        }
+    }
+
+    packaging {
+        jniLibs {
+            pickFirsts += [
+                'lib/arm64-v8a/libsqlite3.so',
+                'lib/armeabi-v7a/libsqlite3.so',
+                'lib/x86_64/libsqlite3.so'
+            ]
+        }
     }
 }
 
 dependencies {
-    // The SDK has been tested with these firebase versions
-    implementation platform('com.google.firebase:firebase-bom:28.3.0')
-    implementation 'com.google.firebase:firebase-messaging-ktx'
-    implementation 'com.google.firebase:firebase-crashlytics-ktx'
-    
-    implementation ("com.enparadigm.sharpsell:sdk:$sdkVersion"){
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
+    implementation 'com.google.firebase:firebase-messaging:24.0.1'
+
+    implementation ("com.enparadigm.sharpsell:sdk:$sdkVersion") {
         exclude group: 'io.flutter', module: 'flutter_embedding_debug'
         exclude group: 'io.flutter', module: 'flutter_embedding_profile'
     }
 }
 ```
 
+:::info
+Sharpsell team will give the SDK version which needs to be added in the implementation.
+:::
+
+The Sharpsell Android SDK supports `armeabi-v7a`, `arm64-v8a`, and `x86_64`. If you minify the app, add the ProGuard keep rules from the [Android Setup](../../android/adding-sharpsell-sdk-android.md) page.
+
 ## Creating Package
 
-Also, you have to create a .java file in `android/app/src/main/java` as SharpsellSDKPackage.java have to create the SDK into the package so that you can access the native modules using this package. These are steps recommended by react native 
+Create `SharpSellSDKPackage.java` in `android/app/src/main/java/...` so you can access the native module from JavaScript.
 
-```
+```java
 package com.myreactnative;
+
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -109,12 +141,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class SharpSellSDKPackage implements ReactPackage  {
+public class SharpSellSDKPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Collections.emptyList();
     }
-    
+
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         return Arrays.<NativeModule>asList(

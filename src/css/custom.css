@@ -57,3 +57,12 @@
 .gallery > .card:hover .arrow {
   transform: translateX(5px);
 }
+
+/* Version dropdown belongs to SDK docs only. */
+.sdk-version-dropdown {
+  display: none;
+}
+
+html.plugin-id-sdk .sdk-version-dropdown {
+  display: inline-block;
+}

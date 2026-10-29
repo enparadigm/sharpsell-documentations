@@ -16,7 +16,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter,
         
         //For Sharpsell this function will be called on click of the notifications
         
-        NSLog("Sharpsell Parent App: did recived notfivations on userNotificationCenter - didReceive")
+        NSLog("Sharpsell Parent App: did received notifications on userNotificationCenter - didReceive")
         NSLog("Sharpsell Parent App: - \(notificationInfo)")
         print(notificationInfo)
         if let app_extra = notificationInfo["app_extra"] as? [AnyHashable : Any],let moe_deeplink = app_extra["moe_deeplink"] as? String{
@@ -58,7 +58,7 @@ func application(_ application: UIApplication, continue userActivity: NSUserActi
         
             let dvcArgs = ["route" : link]
             var sharpsellOpenDataInString = Sharpsell.services.convertJsonToString(dict: dvcArgs) ?? ""
-            if defaults.bool(forKey: "isUserLoggedIn"){
+            if isUserLoggedIn {
                 Sharpsell.services.open(arguments: sharpsellOpenDataInString) { flutterViewController in
                     flutterViewController.navigationController?.navigationBar.isHidden = true
                     flutterViewController.modalPresentationStyle = .fullScreen
